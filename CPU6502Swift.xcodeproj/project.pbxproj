@@ -1,0 +1,406 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		A5743A511D82FEDE007D86EC /* CPU6502.swift in Sources */ = {isa = PBXBuildFile; fileRef = __PBXFileRef_Sources/CPU6502.swift /* CPU6502.swift */; };
+		A5743A521D82FEDE007D86EC /* CPUOperations.swift in Sources */ = {isa = PBXBuildFile; fileRef = __PBXFileRef_Sources/CPUOperations.swift /* CPUOperations.swift */; };
+		A5743A531D82FEDE007D86EC /* Disassembler.swift in Sources */ = {isa = PBXBuildFile; fileRef = __PBXFileRef_Sources/Disassembler.swift /* Disassembler.swift */; };
+		A5743A541D82FEDE007D86EC /* InstructionTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = __PBXFileRef_Sources/InstructionTable.swift /* InstructionTable.swift */; };
+		A5743A551D82FEDE007D86EC /* Registers.swift in Sources */ = {isa = PBXBuildFile; fileRef = __PBXFileRef_Sources/Registers.swift /* Registers.swift */; };
+		A5743A561D82FEDE007D86EC /* String+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = "__PBXFileRef_Sources/String+Hex.swift" /* String+Hex.swift */; };
+		FE578AABDFA4195995C8D682 /* Pods_CPU6502Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4625755318E0FE4010C3A6E6 /* Pods_CPU6502Tests.framework */; };
+		__src_cc_ref_Sources/CPU6502.swift /* CPU6502.swift in Sources */ = {isa = PBXBuildFile; fileRef = __PBXFileRef_Sources/CPU6502.swift /* CPU6502.swift */; };
+		__src_cc_ref_Sources/CPUOperations.swift /* CPUOperations.swift in Sources */ = {isa = PBXBuildFile; fileRef = __PBXFileRef_Sources/CPUOperations.swift /* CPUOperations.swift */; };
+		__src_cc_ref_Sources/Disassembler.swift /* Disassembler.swift in Sources */ = {isa = PBXBuildFile; fileRef = __PBXFileRef_Sources/Disassembler.swift /* Disassembler.swift */; };
+		__src_cc_ref_Sources/InstructionTable.swift /* InstructionTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = __PBXFileRef_Sources/InstructionTable.swift /* InstructionTable.swift */; };
+		__src_cc_ref_Sources/Registers.swift /* Registers.swift in Sources */ = {isa = PBXBuildFile; fileRef = __PBXFileRef_Sources/Registers.swift /* Registers.swift */; };
+		"__src_cc_ref_Sources/String+Hex.swift" /* String+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = "__PBXFileRef_Sources/String+Hex.swift" /* String+Hex.swift */; };
+		__src_cc_ref_Tests/CPU6502Tests/CPUTests.swift /* CPUTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = __PBXFileRef_Tests/CPU6502Tests/CPUTests.swift /* CPUTests.swift */; };
+		__src_cc_ref_Tests/CPU6502Tests/InstructionTests.swift /* InstructionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = __PBXFileRef_Tests/CPU6502Tests/InstructionTests.swift /* InstructionTests.swift */; };
+		__src_cc_ref_Tests/CPU6502Tests/RegistersTests.swift /* RegistersTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = __PBXFileRef_Tests/CPU6502Tests/RegistersTests.swift /* RegistersTests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		266CE1A3534B2102A0AA82B5 /* Pods-CPU6502Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CPU6502Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CPU6502Tests/Pods-CPU6502Tests.debug.xcconfig"; sourceTree = "<group>"; };
+		4625755318E0FE4010C3A6E6 /* Pods_CPU6502Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CPU6502Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5858855BEAF963D67B0494EF /* Pods-CPU6502Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CPU6502Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-CPU6502Tests/Pods-CPU6502Tests.release.xcconfig"; sourceTree = "<group>"; };
+		__PBXFileRef_CPU6502Swift.xcodeproj/Configs/Project.xcconfig /* CPU6502Swift.xcodeproj/Configs/Project.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = CPU6502Swift.xcodeproj/Configs/Project.xcconfig; sourceTree = "<group>"; };
+		__PBXFileRef_Package.swift /* Package.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
+		__PBXFileRef_Sources/CPU6502.swift /* CPU6502.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CPU6502.swift; sourceTree = "<group>"; };
+		__PBXFileRef_Sources/CPUOperations.swift /* CPUOperations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CPUOperations.swift; sourceTree = "<group>"; };
+		__PBXFileRef_Sources/Disassembler.swift /* Disassembler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Disassembler.swift; sourceTree = "<group>"; };
+		__PBXFileRef_Sources/InstructionTable.swift /* InstructionTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstructionTable.swift; sourceTree = "<group>"; };
+		__PBXFileRef_Sources/Registers.swift /* Registers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Registers.swift; sourceTree = "<group>"; };
+		"__PBXFileRef_Sources/String+Hex.swift" /* String+Hex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Hex.swift"; sourceTree = "<group>"; };
+		__PBXFileRef_Tests/CPU6502Tests/CPUTests.swift /* CPUTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CPUTests.swift; sourceTree = "<group>"; };
+		__PBXFileRef_Tests/CPU6502Tests/InstructionTests.swift /* InstructionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstructionTests.swift; sourceTree = "<group>"; };
+		__PBXFileRef_Tests/CPU6502Tests/RegistersTests.swift /* RegistersTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistersTests.swift; sourceTree = "<group>"; };
+		"_____Product_CPU6502Swift" /* CPU6502Swift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = CPU6502Swift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		"_____Product_CPU6502Tests" /* CPU6502Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; path = CPU6502Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		"___LinkPhase_CPU6502Swift" /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		"___LinkPhase_CPU6502Tests" /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 0;
+			files = (
+				FE578AABDFA4195995C8D682 /* Pods_CPU6502Tests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		5A72ED5E9FD1102003C021A4 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				266CE1A3534B2102A0AA82B5 /* Pods-CPU6502Tests.debug.xcconfig */,
+				5858855BEAF963D67B0494EF /* Pods-CPU6502Tests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		F9BCC2016A6FE056D4FAA1EB /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				4625755318E0FE4010C3A6E6 /* Pods_CPU6502Tests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		TestProducts_ /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				"_____Product_CPU6502Tests" /* CPU6502Tests.xctest */,
+			);
+			name = Tests;
+			sourceTree = "<group>";
+		};
+		"___RootGroup_" = {
+			isa = PBXGroup;
+			children = (
+				__PBXFileRef_Package.swift /* Package.swift */,
+				"_____Configs_" /* Configs */,
+				"_____Sources_" /* Sources */,
+				"_______Tests_" /* Tests */,
+				"____Products_" /* Products */,
+				5A72ED5E9FD1102003C021A4 /* Pods */,
+				F9BCC2016A6FE056D4FAA1EB /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		"____Products_" /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				TestProducts_ /* Tests */,
+				"_____Product_CPU6502Swift" /* CPU6502Swift.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		"_____Configs_" /* Configs */ = {
+			isa = PBXGroup;
+			children = (
+				__PBXFileRef_CPU6502Swift.xcodeproj/Configs/Project.xcconfig /* CPU6502Swift.xcodeproj/Configs/Project.xcconfig */,
+			);
+			name = Configs;
+			sourceTree = "<group>";
+		};
+		"_____Sources_" /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				"_______Group_CPU6502Swift" /* CPU6502Swift */,
+			);
+			name = Sources;
+			sourceTree = "<group>";
+		};
+		"_______Group_CPU6502Swift" /* CPU6502Swift */ = {
+			isa = PBXGroup;
+			children = (
+				__PBXFileRef_Sources/CPU6502.swift /* CPU6502.swift */,
+				__PBXFileRef_Sources/CPUOperations.swift /* CPUOperations.swift */,
+				__PBXFileRef_Sources/Disassembler.swift /* Disassembler.swift */,
+				__PBXFileRef_Sources/InstructionTable.swift /* InstructionTable.swift */,
+				__PBXFileRef_Sources/Registers.swift /* Registers.swift */,
+				"__PBXFileRef_Sources/String+Hex.swift" /* String+Hex.swift */,
+			);
+			name = CPU6502Swift;
+			path = Sources;
+			sourceTree = "<group>";
+		};
+		"_______Group_CPU6502Tests" /* CPU6502Tests */ = {
+			isa = PBXGroup;
+			children = (
+				__PBXFileRef_Tests/CPU6502Tests/CPUTests.swift /* CPUTests.swift */,
+				__PBXFileRef_Tests/CPU6502Tests/InstructionTests.swift /* InstructionTests.swift */,
+				__PBXFileRef_Tests/CPU6502Tests/RegistersTests.swift /* RegistersTests.swift */,
+			);
+			name = CPU6502Tests;
+			path = Tests/CPU6502Tests;
+			sourceTree = "<group>";
+		};
+		"_______Tests_" /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				"_______Group_CPU6502Tests" /* CPU6502Tests */,
+			);
+			name = Tests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		"______Target_CPU6502Swift" /* CPU6502Swift */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = "_______Confs_CPU6502Swift" /* Build configuration list for PBXNativeTarget "CPU6502Swift" */;
+			buildPhases = (
+				CompilePhase_CPU6502Swift /* Sources */,
+				"___LinkPhase_CPU6502Swift" /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = CPU6502Swift;
+			productName = CPU6502Swift;
+			productReference = "_____Product_CPU6502Swift" /* CPU6502Swift.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		"______Target_CPU6502Tests" /* CPU6502Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = "_______Confs_CPU6502Tests" /* Build configuration list for PBXNativeTarget "CPU6502Tests" */;
+			buildPhases = (
+				7880FE3B41630F042237B749 /* 📦 Check Pods Manifest.lock */,
+				CompilePhase_CPU6502Tests /* Sources */,
+				"___LinkPhase_CPU6502Tests" /* Frameworks */,
+				B56B04DF6E7EEC1837FE6FF2 /* 📦 Embed Pods Frameworks */,
+				FD32A05911EE4D496BC0EC13 /* 📦 Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = CPU6502Tests;
+			productName = CPU6502Tests;
+			productReference = "_____Product_CPU6502Tests" /* CPU6502Tests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		__RootObject_ /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 9999;
+			};
+			buildConfigurationList = "___RootConfs_" /* Build configuration list for PBXProject "CPU6502Swift" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = "___RootGroup_";
+			productRefGroup = "____Products_" /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				"______Target_CPU6502Swift" /* CPU6502Swift */,
+				"______Target_CPU6502Tests" /* CPU6502Tests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		7880FE3B41630F042237B749 /* 📦 Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		B56B04DF6E7EEC1837FE6FF2 /* 📦 Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CPU6502Tests/Pods-CPU6502Tests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FD32A05911EE4D496BC0EC13 /* 📦 Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CPU6502Tests/Pods-CPU6502Tests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		CompilePhase_CPU6502Swift /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 0;
+			files = (
+				__src_cc_ref_Sources/CPU6502.swift /* CPU6502.swift in Sources */,
+				__src_cc_ref_Sources/CPUOperations.swift /* CPUOperations.swift in Sources */,
+				__src_cc_ref_Sources/Disassembler.swift /* Disassembler.swift in Sources */,
+				__src_cc_ref_Sources/InstructionTable.swift /* InstructionTable.swift in Sources */,
+				__src_cc_ref_Sources/Registers.swift /* Registers.swift in Sources */,
+				"__src_cc_ref_Sources/String+Hex.swift" /* String+Hex.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CompilePhase_CPU6502Tests /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 0;
+			files = (
+				A5743A511D82FEDE007D86EC /* CPU6502.swift in Sources */,
+				A5743A521D82FEDE007D86EC /* CPUOperations.swift in Sources */,
+				A5743A531D82FEDE007D86EC /* Disassembler.swift in Sources */,
+				A5743A541D82FEDE007D86EC /* InstructionTable.swift in Sources */,
+				A5743A551D82FEDE007D86EC /* Registers.swift in Sources */,
+				A5743A561D82FEDE007D86EC /* String+Hex.swift in Sources */,
+				__src_cc_ref_Tests/CPU6502Tests/CPUTests.swift /* CPUTests.swift in Sources */,
+				__src_cc_ref_Tests/CPU6502Tests/InstructionTests.swift /* InstructionTests.swift in Sources */,
+				__src_cc_ref_Tests/CPU6502Tests/RegistersTests.swift /* RegistersTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		_ReleaseConf_CPU6502Swift /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ENABLE_TESTABILITY = YES;
+				FRAMEWORK_SEARCH_PATHS = "$(PLATFORM_DIR)/Developer/Library/Frameworks";
+				INFOPLIST_FILE = CPU6502Swift.xcodeproj/CPU6502Swift_Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(TOOLCHAIN_DIR)/usr/lib/swift/macosx";
+				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_SWIFT_FLAGS = "$(inherited)";
+				PRODUCT_BUNDLE_IDENTIFIER = CPU6502Swift;
+				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
+		_ReleaseConf_CPU6502Tests /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5858855BEAF963D67B0494EF /* Pods-CPU6502Tests.release.xcconfig */;
+			buildSettings = {
+				INFOPLIST_FILE = CPU6502Swift.xcodeproj/CPU6502Tests_Info.plist;
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
+		"___DebugConf_CPU6502Swift" /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ENABLE_TESTABILITY = YES;
+				FRAMEWORK_SEARCH_PATHS = "$(PLATFORM_DIR)/Developer/Library/Frameworks";
+				INFOPLIST_FILE = CPU6502Swift.xcodeproj/CPU6502Swift_Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(TOOLCHAIN_DIR)/usr/lib/swift/macosx";
+				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_SWIFT_FLAGS = "$(inherited)";
+				PRODUCT_BUNDLE_IDENTIFIER = CPU6502Swift;
+				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		"___DebugConf_CPU6502Tests" /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 266CE1A3534B2102A0AA82B5 /* Pods-CPU6502Tests.debug.xcconfig */;
+			buildSettings = {
+				INFOPLIST_FILE = CPU6502Swift.xcodeproj/CPU6502Tests_Info.plist;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		"_____Release_" /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = __PBXFileRef_CPU6502Swift.xcodeproj/Configs/Project.xcconfig /* CPU6502Swift.xcodeproj/Configs/Project.xcconfig */;
+			buildSettings = {
+			};
+			name = Release;
+		};
+		"_______Debug_" /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = __PBXFileRef_CPU6502Swift.xcodeproj/Configs/Project.xcconfig /* CPU6502Swift.xcodeproj/Configs/Project.xcconfig */;
+			buildSettings = {
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		"___RootConfs_" /* Build configuration list for PBXProject "CPU6502Swift" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				"_______Debug_" /* Debug */,
+				"_____Release_" /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		"_______Confs_CPU6502Swift" /* Build configuration list for PBXNativeTarget "CPU6502Swift" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				"___DebugConf_CPU6502Swift" /* Debug */,
+				_ReleaseConf_CPU6502Swift /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		"_______Confs_CPU6502Tests" /* Build configuration list for PBXNativeTarget "CPU6502Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				"___DebugConf_CPU6502Tests" /* Debug */,
+				_ReleaseConf_CPU6502Tests /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = __RootObject_ /* Project object */;
+}
