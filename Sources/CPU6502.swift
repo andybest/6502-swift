@@ -308,7 +308,7 @@ class CPU6502 {
     func executeOpcode(_ opcode: UInt8) -> Int {
         let instruction    = instructionTable[Int(opcode)]
         let addressingMode = getModeForCurrentOpcode(instruction.addressingMode)
-        //let addr           = String(format: "0x%2X", getProgramCounter())
+        let addr           = String(format: "0x%2X", getProgramCounter())
 
         setProgramCounter(getProgramCounter() + UInt16(instruction.numBytes))
         _ = instruction.instructionFunction(addressingMode)
@@ -317,13 +317,13 @@ class CPU6502 {
             setProgramCounter(getProgramCounter() + UInt16(instruction.numBytes))
         }*/
 
-        //print("Executing instruction at \(addr): \(instruction.instructionName) \(addressingMode.assemblyString())")
-        //printCPUState()
+        print("Executing instruction at \(addr): \(instruction.instructionName) \(addressingMode.assemblyString())")
+        printCPUState()
         return instruction.numCycles
     }
 
     func breakExecuted() {
-        print("Break executed at address \(self.registers.pc)")
+        //print("Break executed at address \(self.registers.pc)")
     }
 
 }

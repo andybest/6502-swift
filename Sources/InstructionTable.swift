@@ -47,6 +47,7 @@ extension CPU6502 {
         addInstruction(0x06, ins: opASL, insName:"ASL", addrMode: AM.zeroPage, numBytes: 2, numCycles: 5, specialCycles: false)
         addInstruction(0x08, ins: opPHP, insName:"PHP", addrMode: AM.implicit, numBytes: 1, numCycles: 3, specialCycles: false)
         addInstruction(0x09, ins: opORA, insName:"ORA", addrMode: AM.accumulator, numBytes: 1, numCycles: 2, specialCycles: false)
+        addInstruction(0x0A, ins: opASL, insName:"ASL", addrMode: AM.accumulator, numBytes: 1, numCycles: 6, specialCycles: false)
         addInstruction(0x0D, ins: opORA, insName:"ORA", addrMode: AM.absolute, numBytes: 3, numCycles: 4, specialCycles: false)
         addInstruction(0x0E, ins: opASL, insName:"ASL", addrMode: AM.absolute, numBytes: 3, numCycles: 6, specialCycles: false)
         addInstruction(0x10, ins: opBPL, insName:"BPL", addrMode: AM.relative, numBytes: 2, numCycles: 2, specialCycles: true)

@@ -75,13 +75,13 @@ extension CPU6502 {
         case .zeroPage(let val):
             return getZero(val)
         case .zeroPageX(let val):
-            return getZero(val + registers.x)
+            return getZero(UInt8.addWithOverflow(val, registers.x).0)
         case .absolute(let val):
             return getMem(val)
         case .absoluteX(let val):
-            return getMem(val + UInt16(registers.x))
+            return getMem(UInt16.addWithOverflow(val, UInt16(registers.x)).0)
         case .absoluteY(let val):
-            return getMem(val + UInt16(registers.y))
+            return getMem(UInt16.addWithOverflow(val, UInt16(registers.y)).0)
         case .indirect(let val):
             return getIndirect(val)
         case .indirectX(let val):
@@ -100,13 +100,13 @@ extension CPU6502 {
         case .zeroPage(let val):
             return UInt16(val)
         case .zeroPageX(let val):
-            return UInt16(val + registers.x)
+            return UInt16(UInt8.addWithOverflow(val, registers.x).0)
         case .absolute(let val):
             return val
         case .absoluteX(let val):
-            return val + UInt16(registers.x)
+            return UInt16.addWithOverflow(val, UInt16(registers.x)).0
         case .absoluteY(let val):
-            return val + UInt16(registers.y)
+            return UInt16.addWithOverflow(val, UInt16(registers.y)).0
         case .indirect(let val):
             return UInt16(getIndirect(val))
         case .indirectX(let val):
@@ -138,7 +138,8 @@ extension CPU6502 {
     
     func branchRelative(relVal: UInt16) {
         if relVal & (1 << 7) > 0 {
-            self.setProgramCounter(UInt16.subtractWithOverflow(registers.pc, (relVal ^ (1 << 7))).0)
+            let comp = (~relVal & 0x7f) + 1
+            self.setProgramCounter(UInt16.subtractWithOverflow(registers.pc, comp).0)
         } else {
             self.setProgramCounter(UInt16.addWithOverflow(registers.pc, relVal).0)
         }
@@ -509,7 +510,7 @@ extension CPU6502 {
         registers.setZeroFlag(calculateZero(result))
         registers.setSignFlag(calculateSign(result))
 
-        setValueForAddressingMode(UInt8(result), mode: mode)
+        setValueForAddressingMode(UInt8(result & 0xFF), mode: mode)
         return defaultResponse()
     }
 
