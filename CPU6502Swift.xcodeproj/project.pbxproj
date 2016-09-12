@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A5170ACE1D873B1D00D1C8B3 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5170ACD1D873B1D00D1C8B3 /* main.swift */; };
+		A5170AD21D873B3900D1C8B3 /* CPU6502.swift in Sources */ = {isa = PBXBuildFile; fileRef = __PBXFileRef_Sources/CPU6502.swift /* CPU6502.swift */; };
+		A5170AD31D873B3900D1C8B3 /* CPUOperations.swift in Sources */ = {isa = PBXBuildFile; fileRef = __PBXFileRef_Sources/CPUOperations.swift /* CPUOperations.swift */; };
+		A5170AD41D873B3900D1C8B3 /* Disassembler.swift in Sources */ = {isa = PBXBuildFile; fileRef = __PBXFileRef_Sources/Disassembler.swift /* Disassembler.swift */; };
+		A5170AD51D873B3900D1C8B3 /* InstructionTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = __PBXFileRef_Sources/InstructionTable.swift /* InstructionTable.swift */; };
+		A5170AD61D873B3900D1C8B3 /* Registers.swift in Sources */ = {isa = PBXBuildFile; fileRef = __PBXFileRef_Sources/Registers.swift /* Registers.swift */; };
+		A5170AD71D873B3900D1C8B3 /* String+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = "__PBXFileRef_Sources/String+Hex.swift" /* String+Hex.swift */; };
+		A5170ADC1D87548100D1C8B3 /* 6502_functional_test.hex in CopyFiles */ = {isa = PBXBuildFile; fileRef = A5170AD91D87545C00D1C8B3 /* 6502_functional_test.hex */; };
 		A5743A511D82FEDE007D86EC /* CPU6502.swift in Sources */ = {isa = PBXBuildFile; fileRef = __PBXFileRef_Sources/CPU6502.swift /* CPU6502.swift */; };
 		A5743A521D82FEDE007D86EC /* CPUOperations.swift in Sources */ = {isa = PBXBuildFile; fileRef = __PBXFileRef_Sources/CPUOperations.swift /* CPUOperations.swift */; };
 		A5743A531D82FEDE007D86EC /* Disassembler.swift in Sources */ = {isa = PBXBuildFile; fileRef = __PBXFileRef_Sources/Disassembler.swift /* Disassembler.swift */; };
@@ -25,10 +33,27 @@
 		__src_cc_ref_Tests/CPU6502Tests/RegistersTests.swift /* RegistersTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = __PBXFileRef_Tests/CPU6502Tests/RegistersTests.swift /* RegistersTests.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		A5170AC91D873B1D00D1C8B3 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 12;
+			dstPath = "";
+			dstSubfolderSpec = 16;
+			files = (
+				A5170ADC1D87548100D1C8B3 /* 6502_functional_test.hex in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		266CE1A3534B2102A0AA82B5 /* Pods-CPU6502Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CPU6502Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CPU6502Tests/Pods-CPU6502Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		4625755318E0FE4010C3A6E6 /* Pods_CPU6502Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CPU6502Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5858855BEAF963D67B0494EF /* Pods-CPU6502Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CPU6502Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-CPU6502Tests/Pods-CPU6502Tests.release.xcconfig"; sourceTree = "<group>"; };
+		A5170ACB1D873B1D00D1C8B3 /* Test6502 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Test6502; sourceTree = BUILT_PRODUCTS_DIR; };
+		A5170ACD1D873B1D00D1C8B3 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		A5170AD91D87545C00D1C8B3 /* 6502_functional_test.hex */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 6502_functional_test.hex; sourceTree = "<group>"; };
+		A5170ADA1D87545C00D1C8B3 /* 6502_functional_test.lst */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 6502_functional_test.lst; sourceTree = "<group>"; };
 		__PBXFileRef_CPU6502Swift.xcodeproj/Configs/Project.xcconfig /* CPU6502Swift.xcodeproj/Configs/Project.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = CPU6502Swift.xcodeproj/Configs/Project.xcconfig; sourceTree = "<group>"; };
 		__PBXFileRef_Package.swift /* Package.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
 		__PBXFileRef_Sources/CPU6502.swift /* CPU6502.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CPU6502.swift; sourceTree = "<group>"; };
@@ -45,6 +70,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		A5170AC81D873B1D00D1C8B3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		"___LinkPhase_CPU6502Swift" /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 0;
@@ -72,6 +104,24 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		A5170ACC1D873B1D00D1C8B3 /* Test6502 */ = {
+			isa = PBXGroup;
+			children = (
+				A5170AD81D87544B00D1C8B3 /* test-software */,
+				A5170ACD1D873B1D00D1C8B3 /* main.swift */,
+			);
+			path = Test6502;
+			sourceTree = "<group>";
+		};
+		A5170AD81D87544B00D1C8B3 /* test-software */ = {
+			isa = PBXGroup;
+			children = (
+				A5170AD91D87545C00D1C8B3 /* 6502_functional_test.hex */,
+				A5170ADA1D87545C00D1C8B3 /* 6502_functional_test.lst */,
+			);
+			name = "test-software";
+			sourceTree = "<group>";
+		};
 		F9BCC2016A6FE056D4FAA1EB /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -95,6 +145,7 @@
 				"_____Configs_" /* Configs */,
 				"_____Sources_" /* Sources */,
 				"_______Tests_" /* Tests */,
+				A5170ACC1D873B1D00D1C8B3 /* Test6502 */,
 				"____Products_" /* Products */,
 				5A72ED5E9FD1102003C021A4 /* Pods */,
 				F9BCC2016A6FE056D4FAA1EB /* Frameworks */,
@@ -106,6 +157,7 @@
 			children = (
 				TestProducts_ /* Tests */,
 				"_____Product_CPU6502Swift" /* CPU6502Swift.framework */,
+				A5170ACB1D873B1D00D1C8B3 /* Test6502 */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -162,6 +214,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		A5170ACA1D873B1D00D1C8B3 /* Test6502 */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A5170AD11D873B1D00D1C8B3 /* Build configuration list for PBXNativeTarget "Test6502" */;
+			buildPhases = (
+				A5170AC71D873B1D00D1C8B3 /* Sources */,
+				A5170AC81D873B1D00D1C8B3 /* Frameworks */,
+				A5170AC91D873B1D00D1C8B3 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Test6502;
+			productName = Test6502;
+			productReference = A5170ACB1D873B1D00D1C8B3 /* Test6502 */;
+			productType = "com.apple.product-type.tool";
+		};
 		"______Target_CPU6502Swift" /* CPU6502Swift */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = "_______Confs_CPU6502Swift" /* Build configuration list for PBXNativeTarget "CPU6502Swift" */;
@@ -203,7 +272,14 @@
 		__RootObject_ /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 0800;
 				LastUpgradeCheck = 9999;
+				TargetAttributes = {
+					A5170ACA1D873B1D00D1C8B3 = {
+						CreatedOnToolsVersion = 8.0;
+						ProvisioningStyle = Automatic;
+					};
+				};
 			};
 			buildConfigurationList = "___RootConfs_" /* Build configuration list for PBXProject "CPU6502Swift" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -219,6 +295,7 @@
 			targets = (
 				"______Target_CPU6502Swift" /* CPU6502Swift */,
 				"______Target_CPU6502Tests" /* CPU6502Tests */,
+				A5170ACA1D873B1D00D1C8B3 /* Test6502 */,
 			);
 		};
 /* End PBXProject section */
@@ -272,6 +349,20 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		A5170AC71D873B1D00D1C8B3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A5170ACE1D873B1D00D1C8B3 /* main.swift in Sources */,
+				A5170AD51D873B3900D1C8B3 /* InstructionTable.swift in Sources */,
+				A5170AD21D873B3900D1C8B3 /* CPU6502.swift in Sources */,
+				A5170AD31D873B3900D1C8B3 /* CPUOperations.swift in Sources */,
+				A5170AD71D873B3900D1C8B3 /* String+Hex.swift in Sources */,
+				A5170AD61D873B3900D1C8B3 /* Registers.swift in Sources */,
+				A5170AD41D873B3900D1C8B3 /* Disassembler.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		CompilePhase_CPU6502Swift /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 0;
@@ -304,6 +395,98 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
+		A5170ACF1D873B1D00D1C8B3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		A5170AD01D873B1D00D1C8B3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
 		_ReleaseConf_CPU6502Swift /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -373,6 +556,14 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		A5170AD11D873B1D00D1C8B3 /* Build configuration list for PBXNativeTarget "Test6502" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A5170ACF1D873B1D00D1C8B3 /* Debug */,
+				A5170AD01D873B1D00D1C8B3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		"___RootConfs_" /* Build configuration list for PBXProject "CPU6502Swift" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

@@ -52,8 +52,11 @@ struct Registers {
         let aStr = String(format:"0x%02X", self.a)
         let xStr = String(format:"0x%02X", self.x)
         let yStr = String(format:"0x%02X", self.y)
+        let pStr = String(format:"0x%02X", self.p)
+        let sStr = String(format:"0x%02X", self.s)
+        let pcStr = String(format:"0x%04X", self.pc)
 
-        return "A: \(aStr), X:\(xStr), Y:\(yStr)"
+        return "A: \(aStr), X:\(xStr), Y:\(yStr), P:\(pStr), S:\(sStr), PC:\(pcStr)"
     }
 
     func boolToInt(_ value: Bool) -> UInt8 {
@@ -68,7 +71,8 @@ struct Registers {
     }
 
     mutating func setStatusByte(_ value: UInt8) {
-        p = value
+        // Always set unused flag to 1
+        p = value | (1 << 5)
     }
 
     func getCarryFlag() -> Bool {
