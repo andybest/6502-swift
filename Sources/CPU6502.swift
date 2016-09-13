@@ -274,7 +274,7 @@ class CPU6502 {
         return cycles
     }
 
-    func getModeForCurrentOpcode(_ mode: AddressingModeRef) -> AddressingMode {
+    func getModeForCurrentOpcode(_ mode: AddressingModeRef, numBytes: Int) -> AddressingMode {
         switch (mode) {
         case .implicit:
             return AddressingMode.implicit
@@ -297,17 +297,21 @@ class CPU6502 {
         case .absoluteY:
             return AddressingMode.absoluteY(UInt16(getMem(getProgramCounter() + 1)) | (UInt16(getMem(getProgramCounter() + 2)) << UInt16(8)))
         case .indirect:
-            return AddressingMode.indirect(UInt16(getMem(getProgramCounter() + 1)))
+            return AddressingMode.indirect(UInt16(getMem(getProgramCounter() + 1)) | (UInt16(getMem(getProgramCounter() + 2)) << UInt16(8)))
         case .indirectX:
-            return AddressingMode.indirectX(UInt16(getMem(getProgramCounter() + 1)))
+            return AddressingMode.indirectX(UInt16(getMem(getProgramCounter() + 1)) | (UInt16(getMem(getProgramCounter() + 2)) << UInt16(8)))
         case .indirectY:
-            return AddressingMode.indirectY(UInt16(getMem(getProgramCounter() + 1)))
+            if(numBytes == 2)
+            {
+                return AddressingMode.indirectY(UInt16(getMem(getProgramCounter() + 1)))
+            }
+            return AddressingMode.indirectY(UInt16(getMem(getProgramCounter() + 1)) | (UInt16(getMem(getProgramCounter() + 2)) << UInt16(8)))
         }
     }
 
     func executeOpcode(_ opcode: UInt8) -> Int {
         let instruction    = instructionTable[Int(opcode)]
-        let addressingMode = getModeForCurrentOpcode(instruction.addressingMode)
+        let addressingMode = getModeForCurrentOpcode(instruction.addressingMode, numBytes: instruction.numBytes)
         let addr           = String(format: "0x%2X", getProgramCounter())
 
         setProgramCounter(getProgramCounter() + UInt16(instruction.numBytes))

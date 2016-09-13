@@ -48,12 +48,21 @@ extension CPU6502 {
     }
     
     func getIndirect(_ address: UInt16) -> UInt8 {
-        let indirectAddress: UInt16 = address
-        return getMem(UInt16(getMem(indirectAddress)) | (UInt16(getMem(indirectAddress + 1)) << 8))
+        let indirectAddress: UInt16 = UInt16(getMem(address)) | (UInt16(getMem(address + 1)) << 8)
+        return getMem(indirectAddress)
+    }
+    
+    func getIndirectAddress(_ address: UInt16) -> UInt16 {
+        let indirectAddress: UInt16 = UInt16(getMem(address)) | (UInt16(getMem(address + 1)) << 8)
+        return indirectAddress
     }
     
     func getIndirectX(_ address: UInt16) -> UInt8 {
         return getIndirect(address + UInt16(registers.x))
+    }
+    
+    func getIndirectXAddress(_ address: UInt16) -> UInt16 {
+        return getIndirectAddress(address + UInt16(registers.x))
     }
     
     func getIndirectY(_ address: UInt16) -> UInt8 {
@@ -76,6 +85,8 @@ extension CPU6502 {
             return getZero(val)
         case .zeroPageX(let val):
             return getZero(UInt8.addWithOverflow(val, registers.x).0)
+        case .zeroPageY(let val):
+            return getZero(UInt8.addWithOverflow(val, registers.y).0)
         case .absolute(let val):
             return getMem(val)
         case .absoluteX(let val):
@@ -101,6 +112,8 @@ extension CPU6502 {
             return UInt16(val)
         case .zeroPageX(let val):
             return UInt16(UInt8.addWithOverflow(val, registers.x).0)
+        case .zeroPageY(let val):
+            return UInt16(UInt8.addWithOverflow(val, registers.y).0)
         case .absolute(let val):
             return val
         case .absoluteX(let val):
@@ -108,9 +121,9 @@ extension CPU6502 {
         case .absoluteY(let val):
             return UInt16.addWithOverflow(val, UInt16(registers.y)).0
         case .indirect(let val):
-            return UInt16(getIndirect(val))
+            return getIndirectAddress(val)
         case .indirectX(let val):
-            return UInt16(getIndirectX(val))
+            return getIndirectXAddress(val)
         case .indirectY(let val):
             return getIndirectYAddress(val)
         case .relative(let val):
@@ -253,9 +266,10 @@ extension CPU6502 {
     func opBRK(_ mode: AddressingMode) -> InstructionResponse {
         setProgramCounter(getProgramCounter() &+ 1)
         push16(getProgramCounter())
+        registers.setBreakFlag(true)
         push8(registers.getStatusByte())
         registers.setInterruptFlag(true)
-        setProgramCounter(UInt16(getMem(0xFFFE)) | (UInt16(0xFFFF) << 8))
+        setProgramCounter(getIndirectAddress(0xFFFE))
         
         breakExecuted()
         return InstructionResponse(handlesPC: true)
@@ -363,7 +377,7 @@ extension CPU6502 {
     }
     
     func opDEC(_ mode: AddressingMode) -> InstructionResponse {
-        let result = UInt16(registers.a) - UInt16(1)
+        let result = UInt16(UInt8.subtractWithOverflow(registers.a, 1).0)
         registers.setZeroFlag(calculateZero(result))
         registers.setSignFlag(calculateSign(result))
         registers.a = UInt8(result & 0xFF)
@@ -371,7 +385,7 @@ extension CPU6502 {
     }
     
     func opDEX(_ mode: AddressingMode) -> InstructionResponse {
-        let result = UInt16(registers.x) - UInt16(1)
+        let result = UInt16(UInt8.subtractWithOverflow(registers.x, 1).0)
         registers.setZeroFlag(calculateZero(result))
         registers.setSignFlag(calculateSign(result))
         registers.x = UInt8(result & 0xFF)
@@ -379,7 +393,7 @@ extension CPU6502 {
     }
     
     func opDEY(_ mode: AddressingMode) -> InstructionResponse {
-        let result = UInt16(registers.y) - UInt16(1)
+        let result = UInt16(UInt8.subtractWithOverflow(registers.y, 1).0)
         registers.setZeroFlag(calculateZero(result))
         registers.setSignFlag(calculateSign(result))
         registers.y = UInt8(result & 0xFF)
@@ -391,7 +405,7 @@ extension CPU6502 {
         
         registers.a ^= value
         registers.setSignFlag(calculateSign(UInt16(registers.a)))
-        registers.setZeroFlag(calculateSign(UInt16(registers.a)))
+        registers.setZeroFlag(calculateZero(UInt16(registers.a)))
         return defaultResponse()
     }
     
@@ -495,7 +509,7 @@ extension CPU6502 {
     func opPLA(_ mode: AddressingMode) -> InstructionResponse {
         registers.a = pop8()
         registers.setSignFlag(calculateSign(UInt16(registers.a)))
-        registers.setZeroFlag(calculateSign(UInt16(registers.a)))
+        registers.setZeroFlag(calculateZero(UInt16(registers.a)))
         return defaultResponse()
     }
     
@@ -580,42 +594,42 @@ extension CPU6502 {
     func opTAX(_ mode: AddressingMode) -> InstructionResponse {
         registers.x = registers.a
         registers.setSignFlag(calculateSign(UInt16(registers.a)))
-        registers.setZeroFlag(calculateSign(UInt16(registers.a)))
+        registers.setZeroFlag(calculateZero(UInt16(registers.a)))
         return defaultResponse()
     }
     
     func opTAY(_ mode: AddressingMode) -> InstructionResponse {
         registers.y = registers.a
         registers.setSignFlag(calculateSign(UInt16(registers.a)))
-        registers.setZeroFlag(calculateSign(UInt16(registers.a)))
+        registers.setZeroFlag(calculateZero(UInt16(registers.a)))
         return defaultResponse()
     }
     
     func opTSX(_ mode: AddressingMode) -> InstructionResponse {
         registers.x = registers.s
         registers.setSignFlag(calculateSign(UInt16(registers.s)))
-        registers.setZeroFlag(calculateSign(UInt16(registers.s)))
+        registers.setZeroFlag(calculateZero(UInt16(registers.s)))
         return defaultResponse()
     }
     
     func opTXA(_ mode: AddressingMode) -> InstructionResponse {
         registers.a = registers.x
         registers.setSignFlag(calculateSign(UInt16(registers.a)))
-        registers.setZeroFlag(calculateSign(UInt16(registers.a)))
+        registers.setZeroFlag(calculateZero(UInt16(registers.a)))
         return defaultResponse()
     }
     
     func opTXS(_ mode: AddressingMode) -> InstructionResponse {
         registers.s = registers.x
-        registers.setSignFlag(calculateSign(UInt16(registers.s)))
-        registers.setZeroFlag(calculateSign(UInt16(registers.s)))
+        //registers.setSignFlag(calculateSign(UInt16(registers.s)))
+        //registers.setZeroFlag(calculateZero(UInt16(registers.s)))
         return defaultResponse()
     }
     
     func opTYA(_ mode: AddressingMode) -> InstructionResponse {
         registers.a = registers.y
         registers.setSignFlag(calculateSign(UInt16(registers.a)))
-        registers.setZeroFlag(calculateSign(UInt16(registers.a)))
+        registers.setZeroFlag(calculateZero(UInt16(registers.a)))
         return defaultResponse()
     }
 }
