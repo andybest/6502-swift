@@ -1114,6 +1114,180 @@ class InstructionTests: XCTestCase {
         expect(self.cpu.registers.getSignFlag()).to(beTrue())
         expect(self.cpu.registers.getZeroFlag()).to(beFalse())
     }
+    
+    /* EOR Immediate */
+    
+    func testEORImmediateFlipsBitsOverSettingZFlag() {
+        self.cpu.setMemFromHexString("49 FF", address: 0x0000)
+        self.cpu.registers.a = 0xFF
+        _ = self.cpu.runCycles(1)
+        
+        expect(self.cpu.getProgramCounter()).to(equal(0x0002))
+        expect(self.cpu.registers.a).to(equal(0x00))
+        expect(self.cpu.registers.getZeroFlag()).to(beTrue())
+    }
+    
+    func testEORImmediateFlipsBitsOverSettingNFlag() {
+        self.cpu.setMemFromHexString("49 FF", address: 0x0000)
+        self.cpu.registers.a = 0x00
+        _ = self.cpu.runCycles(1)
+        
+        expect(self.cpu.getProgramCounter()).to(equal(0x0002))
+        expect(self.cpu.registers.a).to(equal(0xFF))
+        expect(self.cpu.registers.getSignFlag()).to(beTrue())
+        expect(self.cpu.registers.getZeroFlag()).to(beFalse())
+    }
+    
+    /* EOR Absolute X Indexed */
+    
+    func testEORAbsoluteXFlipsBitsOverSettingZFlag() {
+        self.cpu.setMemFromHexString("5D CD AB", address: 0x0000)
+        self.cpu.registers.a = 0xFF
+        self.cpu.registers.x = 0x03
+        self.cpu.setMem(0xABCD + 0x03, value: 0xFF)
+        _ = self.cpu.runCycles(1)
+        
+        expect(self.cpu.getProgramCounter()).to(equal(0x0003))
+        expect(self.cpu.registers.a).to(equal(0x00))
+        expect(self.cpu.getMem(0xABCD + 0x03)).to(equal(0xFF))
+        expect(self.cpu.registers.getZeroFlag()).to(beTrue())
+    }
+    
+    func testEORAbsoluteXFlipsBitsOverSettingNFlag() {
+        self.cpu.setMemFromHexString("5D CD AB", address: 0x0000)
+        self.cpu.registers.a = 0x00
+        self.cpu.registers.x = 0x03
+        self.cpu.setMem(0xABCD + 0x03, value: 0xFF)
+        _ = self.cpu.runCycles(1)
+        
+        expect(self.cpu.getProgramCounter()).to(equal(0x0003))
+        expect(self.cpu.registers.a).to(equal(0xFF))
+        expect(self.cpu.getMem(0xABCD + 0x03)).to(equal(0xFF))
+        expect(self.cpu.registers.getSignFlag()).to(beTrue())
+        expect(self.cpu.registers.getZeroFlag()).to(beFalse())
+    }
+    
+    /* EOR Absolute Y Indexed */
+    
+    func testEORAbsoluteYFlipsBitsOverSettingZFlag() {
+        self.cpu.setMemFromHexString("59 CD AB", address: 0x0000)
+        self.cpu.registers.a = 0xFF
+        self.cpu.registers.y = 0x03
+        self.cpu.setMem(0xABCD + 0x03, value: 0xFF)
+        _ = self.cpu.runCycles(1)
+        
+        expect(self.cpu.getProgramCounter()).to(equal(0x0003))
+        expect(self.cpu.registers.a).to(equal(0x00))
+        expect(self.cpu.getMem(0xABCD + 0x03)).to(equal(0xFF))
+        expect(self.cpu.registers.getZeroFlag()).to(beTrue())
+    }
+    
+    func testEORAbsoluteYFlipsBitsOverSettingNFlag() {
+        self.cpu.setMemFromHexString("59 CD AB", address: 0x0000)
+        self.cpu.registers.a = 0x00
+        self.cpu.registers.y = 0x03
+        self.cpu.setMem(0xABCD + 0x03, value: 0xFF)
+        _ = self.cpu.runCycles(1)
+        
+        expect(self.cpu.getProgramCounter()).to(equal(0x0003))
+        expect(self.cpu.registers.a).to(equal(0xFF))
+        expect(self.cpu.getMem(0xABCD + 0x03)).to(equal(0xFF))
+        expect(self.cpu.registers.getSignFlag()).to(beTrue())
+        expect(self.cpu.registers.getZeroFlag()).to(beFalse())
+    }
+    
+    
+    /* EOR Indirect X Indexed */
+    
+    func testEORIndirectXFlipsBitsOverSettingZFlag() {
+        self.cpu.setMemFromHexString("41 10", address: 0x0000)
+        self.cpu.setMemFromHexString("CD AB", address: 0x0013)
+        self.cpu.registers.a = 0xFF
+        self.cpu.registers.x = 0x03
+        self.cpu.setMem(0xABCD, value: 0xFF)
+        _ = self.cpu.runCycles(1)
+        
+        expect(self.cpu.getProgramCounter()).to(equal(0x0002))
+        expect(self.cpu.registers.a).to(equal(0x00))
+        expect(self.cpu.getMem(0xABCD)).to(equal(0xFF))
+        expect(self.cpu.registers.getZeroFlag()).to(beTrue())
+    }
+    
+    func testEORIndirectXFlipsBitsOverSettingNFlag() {
+        self.cpu.setMemFromHexString("41 10", address: 0x0000)
+        self.cpu.setMemFromHexString("CD AB", address: 0x0013)
+        self.cpu.registers.a = 0x00
+        self.cpu.registers.x = 0x03
+        self.cpu.setMem(0xABCD, value: 0xFF)
+        _ = self.cpu.runCycles(1)
+        
+        expect(self.cpu.getProgramCounter()).to(equal(0x0002))
+        expect(self.cpu.registers.a).to(equal(0xFF))
+        expect(self.cpu.getMem(0xABCD)).to(equal(0xFF))
+        expect(self.cpu.registers.getSignFlag()).to(beTrue())
+        expect(self.cpu.registers.getZeroFlag()).to(beFalse())
+    }
+    
+    /* EOR Indirect Y Indexed */
+    
+    func testEORIndirectYFlipsBitsOverSettingZFlag() {
+        self.cpu.setMemFromHexString("51 10", address: 0x0000)
+        self.cpu.setMemFromHexString("CD AB", address: 0x0010)
+        self.cpu.registers.a = 0xFF
+        self.cpu.registers.y = 0x03
+        self.cpu.setMem(0xABCD + 0x03, value: 0xFF)
+        _ = self.cpu.runCycles(1)
+        
+        expect(self.cpu.getProgramCounter()).to(equal(0x0002))
+        expect(self.cpu.registers.a).to(equal(0x00))
+        expect(self.cpu.getMem(0xABCD + 0x03)).to(equal(0xFF))
+        expect(self.cpu.registers.getZeroFlag()).to(beTrue())
+    }
+    
+    func testEORIndirectYFlipsBitsOverSettingNFlag() {
+        self.cpu.setMemFromHexString("51 10", address: 0x0000)
+        self.cpu.setMemFromHexString("CD AB", address: 0x0010)
+        self.cpu.registers.a = 0x00
+        self.cpu.registers.y = 0x03
+        self.cpu.setMem(0xABCD + 0x03, value: 0xFF)
+        _ = self.cpu.runCycles(1)
+        
+        expect(self.cpu.getProgramCounter()).to(equal(0x0002))
+        expect(self.cpu.registers.a).to(equal(0xFF))
+        expect(self.cpu.getMem(0xABCD + 0x03)).to(equal(0xFF))
+        expect(self.cpu.registers.getSignFlag()).to(beTrue())
+        expect(self.cpu.registers.getZeroFlag()).to(beFalse())
+    }
+    
+    /* EOR ZP X Indexed */
+    
+    func testZPXFlipsBitsOverSettingZFlag() {
+        self.cpu.setMemFromHexString("55 10", address: 0x0000)
+        self.cpu.setMemFromHexString("FF", address: 0x0013)
+        self.cpu.registers.a = 0xFF
+        self.cpu.registers.x = 0x03
+        _ = self.cpu.runCycles(1)
+        
+        expect(self.cpu.getProgramCounter()).to(equal(0x0002))
+        expect(self.cpu.registers.a).to(equal(0x00))
+        expect(self.cpu.getMem(0x0010 + 0x03)).to(equal(0xFF))
+        expect(self.cpu.registers.getZeroFlag()).to(beTrue())
+    }
+    
+    func testEORZPXFlipsBitsOverSettingNFlag() {
+        self.cpu.setMemFromHexString("55 10", address: 0x0000)
+        self.cpu.setMemFromHexString("FF", address: 0x0013)
+        self.cpu.registers.a = 0x00
+        self.cpu.registers.x = 0x03
+        _ = self.cpu.runCycles(1)
+        
+        expect(self.cpu.getProgramCounter()).to(equal(0x0002))
+        expect(self.cpu.registers.a).to(equal(0xFF))
+        expect(self.cpu.getMem(0x0010 + 0x03)).to(equal(0xFF))
+        expect(self.cpu.registers.getSignFlag()).to(beTrue())
+        expect(self.cpu.registers.getZeroFlag()).to(beFalse())
+    }
+
 
 
     /* JSR */
