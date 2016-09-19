@@ -377,10 +377,11 @@ extension CPU6502 {
     }
     
     func opDEC(_ mode: AddressingMode) -> InstructionResponse {
-        let result = UInt16(UInt8.subtractWithOverflow(registers.a, 1).0)
+        let value = valueForAddressingMode(mode)
+        let result = UInt16(UInt8.subtractWithOverflow(value, 1).0)
         registers.setZeroFlag(calculateZero(result))
         registers.setSignFlag(calculateSign(result))
-        registers.a = UInt8(result & 0xFF)
+        setValueForAddressingMode(UInt8(result & 0xFF), mode: mode)
         return defaultResponse()
     }
     

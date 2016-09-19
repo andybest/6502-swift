@@ -844,6 +844,276 @@ class InstructionTests: XCTestCase {
         expect(self.cpu.getProgramCounter()).to(equal(0x0001))
         expect(self.cpu.registers.getOverflowFlag()).to(beFalse())
     }
+    
+    /* DEC Absolute */
+    
+    func testDECAbsoluteDecrementsMemory() {
+        self.cpu.setMemFromHexString("CE CD AB", address: 0x0000)
+        self.cpu.setMem(0xABCD, value: 0x10)
+        _ = self.cpu.runCycles(1)
+        
+        expect(self.cpu.getProgramCounter()).to(equal(0x0003))
+        expect(self.cpu.getMem(0xABCD)).to(equal(0x0F))
+        expect(self.cpu.registers.getSignFlag()).to(beFalse())
+        expect(self.cpu.registers.getZeroFlag()).to(beFalse())
+    }
+    
+    func testDECAbsoluteBelow0RollsOverAndSetsNegativeFlag() {
+        self.cpu.setMemFromHexString("CE CD AB", address: 0x0000)
+        self.cpu.setMem(0xABCD, value: 0x00)
+        _ = self.cpu.runCycles(1)
+        
+        expect(self.cpu.getProgramCounter()).to(equal(0x0003))
+        expect(self.cpu.getMem(0xABCD)).to(equal(0xFF))
+        expect(self.cpu.registers.getSignFlag()).to(beTrue())
+        expect(self.cpu.registers.getZeroFlag()).to(beFalse())
+    }
+    
+    func testDECAbsoluteSetsZeroFlagWhenDecrementingToZero() {
+        self.cpu.setMemFromHexString("CE CD AB", address: 0x0000)
+        self.cpu.setMem(0xABCD, value: 0x01)
+        _ = self.cpu.runCycles(1)
+        
+        expect(self.cpu.getProgramCounter()).to(equal(0x0003))
+        expect(self.cpu.getMem(0xABCD)).to(equal(0x00))
+        expect(self.cpu.registers.getSignFlag()).to(beFalse())
+        expect(self.cpu.registers.getZeroFlag()).to(beTrue())
+    }
+    
+    /* DEC ZP */
+    
+    func testDECZeroPageDecrementsMemory() {
+        self.cpu.setMemFromHexString("C6 10", address: 0x0000)
+        self.cpu.setMem(0x0010, value: 0x10)
+        _ = self.cpu.runCycles(1)
+        
+        expect(self.cpu.getProgramCounter()).to(equal(0x0002))
+        expect(self.cpu.getMem(0x0010)).to(equal(0x0F))
+        expect(self.cpu.registers.getSignFlag()).to(beFalse())
+        expect(self.cpu.registers.getZeroFlag()).to(beFalse())
+    }
+    
+    func testDECZeroPageBelow0RollsOverAndSetsNegativeFlag() {
+        self.cpu.setMemFromHexString("C6 10", address: 0x0000)
+        self.cpu.setMem(0x0010, value: 0x00)
+        _ = self.cpu.runCycles(1)
+        
+        expect(self.cpu.getProgramCounter()).to(equal(0x0002))
+        expect(self.cpu.getMem(0x0010)).to(equal(0xFF))
+        expect(self.cpu.registers.getSignFlag()).to(beTrue())
+        expect(self.cpu.registers.getZeroFlag()).to(beFalse())
+    }
+    
+    func testDECZeroPageSetsZeroFlagWhenDecrementingToZero() {
+        self.cpu.setMemFromHexString("C6 10", address: 0x0000)
+        self.cpu.setMem(0x0010, value: 0x01)
+        _ = self.cpu.runCycles(1)
+        
+        expect(self.cpu.getProgramCounter()).to(equal(0x0002))
+        expect(self.cpu.getMem(0x0010)).to(equal(0x00))
+        expect(self.cpu.registers.getSignFlag()).to(beFalse())
+        expect(self.cpu.registers.getZeroFlag()).to(beTrue())
+    }
+    
+    /* DEC Absolute X Indexed */
+    
+    func testDECAbsoluteXDecrementsMemory() {
+        self.cpu.setMemFromHexString("DE CD AB", address: 0x0000)
+        self.cpu.registers.x = 0x03
+        self.cpu.setMem(0xABCD + 0x03, value: 0x10)
+        _ = self.cpu.runCycles(1)
+        
+        expect(self.cpu.getProgramCounter()).to(equal(0x0003))
+        expect(self.cpu.getMem(0xABCD + 0x03)).to(equal(0x0F))
+        expect(self.cpu.registers.getSignFlag()).to(beFalse())
+        expect(self.cpu.registers.getZeroFlag()).to(beFalse())
+    }
+    
+    func testDECAbsoluteXBelow0RollsOverAndSetsNegativeFlag() {
+        self.cpu.setMemFromHexString("DE CD AB", address: 0x0000)
+        self.cpu.registers.x = 0x03
+        self.cpu.setMem(0xABCD + 0x03, value: 0x00)
+        _ = self.cpu.runCycles(1)
+        
+        expect(self.cpu.getProgramCounter()).to(equal(0x0003))
+        expect(self.cpu.getMem(0xABCD + 0x03)).to(equal(0xFF))
+        expect(self.cpu.registers.getSignFlag()).to(beTrue())
+        expect(self.cpu.registers.getZeroFlag()).to(beFalse())
+    }
+    
+    func testDECAbsoluteXSetsZeroFlagWhenDecrementingToZero() {
+        self.cpu.setMemFromHexString("DE CD AB", address: 0x0000)
+        self.cpu.registers.x = 0x03
+        self.cpu.setMem(0xABCD + 0x03, value: 0x01)
+        _ = self.cpu.runCycles(1)
+        
+        expect(self.cpu.getProgramCounter()).to(equal(0x0003))
+        expect(self.cpu.getMem(0xABCD + 0x03)).to(equal(0x00))
+        expect(self.cpu.registers.getSignFlag()).to(beFalse())
+        expect(self.cpu.registers.getZeroFlag()).to(beTrue())
+    }
+    
+    /* DEC ZP X Indexed */
+    
+    func testDECXZeroPageDecrementsMemory() {
+        self.cpu.setMemFromHexString("D6 10", address: 0x0000)
+        self.cpu.registers.x = 0x03
+        self.cpu.setMem(0x0010 + 0x03, value: 0x10)
+        _ = self.cpu.runCycles(1)
+        
+        expect(self.cpu.getProgramCounter()).to(equal(0x0002))
+        expect(self.cpu.getMem(0x0010 + 0x03)).to(equal(0x0F))
+        expect(self.cpu.registers.getSignFlag()).to(beFalse())
+        expect(self.cpu.registers.getZeroFlag()).to(beFalse())
+    }
+    
+    func testDECXZeroPageBelow0RollsOverAndSetsNegativeFlag() {
+        self.cpu.setMemFromHexString("D6 10", address: 0x0000)
+        self.cpu.registers.x = 0x03
+        self.cpu.setMem(0x0010 + 0x03, value: 0x00)
+        _ = self.cpu.runCycles(1)
+        
+        expect(self.cpu.getProgramCounter()).to(equal(0x0002))
+        expect(self.cpu.getMem(0x0010 + 0x03)).to(equal(0xFF))
+        expect(self.cpu.registers.getSignFlag()).to(beTrue())
+        expect(self.cpu.registers.getZeroFlag()).to(beFalse())
+    }
+    
+    func testDECXZeroPageSetsZeroFlagWhenDecrementingToZero() {
+        self.cpu.setMemFromHexString("D6 10", address: 0x0000)
+        self.cpu.registers.x = 0x03
+        self.cpu.setMem(0x0010 + 0x03, value: 0x01)
+        _ = self.cpu.runCycles(1)
+        
+        expect(self.cpu.getProgramCounter()).to(equal(0x0002))
+        expect(self.cpu.getMem(0x0010 + 0x03)).to(equal(0x00))
+        expect(self.cpu.registers.getSignFlag()).to(beFalse())
+        expect(self.cpu.registers.getZeroFlag()).to(beTrue())
+    }
+    
+    /* DEX */
+    
+    func testDEXDecrementsX() {
+        self.cpu.registers.x = 0x10
+        self.cpu.setMemFromHexString("CA", address: 0x0000)
+        _ = self.cpu.runCycles(1)
+        
+        expect(self.cpu.getProgramCounter()).to(equal(0x0001))
+        expect(self.cpu.registers.x).to(equal(0x0F))
+        expect(self.cpu.registers.getSignFlag()).to(beFalse())
+        expect(self.cpu.registers.getZeroFlag()).to(beFalse())
+    }
+    
+    func testDEXBelow0RollsOverAndSetsNegativeFlag() {
+        self.cpu.registers.x = 0x00
+        self.cpu.setMemFromHexString("CA", address: 0x0000)
+        _ = self.cpu.runCycles(1)
+        
+        expect(self.cpu.getProgramCounter()).to(equal(0x0001))
+        expect(self.cpu.registers.x).to(equal(0xFF))
+        expect(self.cpu.registers.getSignFlag()).to(beTrue())
+        expect(self.cpu.registers.getZeroFlag()).to(beFalse())
+    }
+    
+    func testDEXSetsZeroFlagWhenDecrementingToZero() {
+        self.cpu.registers.x = 0x01
+        self.cpu.setMemFromHexString("CA", address: 0x0000)
+        _ = self.cpu.runCycles(1)
+        
+        expect(self.cpu.getProgramCounter()).to(equal(0x0001))
+        expect(self.cpu.registers.x).to(equal(0x00))
+        expect(self.cpu.registers.getSignFlag()).to(beFalse())
+        expect(self.cpu.registers.getZeroFlag()).to(beTrue())
+    }
+    
+    /* DEY */
+    
+    func testDEYDecrementsY() {
+        self.cpu.registers.y = 0x10
+        self.cpu.setMemFromHexString("88", address: 0x0000)
+        _ = self.cpu.runCycles(1)
+        
+        expect(self.cpu.getProgramCounter()).to(equal(0x0001))
+        expect(self.cpu.registers.y).to(equal(0x0F))
+        expect(self.cpu.registers.getSignFlag()).to(beFalse())
+        expect(self.cpu.registers.getZeroFlag()).to(beFalse())
+    }
+    
+    func testDEYBelow0RollsOverAndSetsNegativeFlag() {
+        self.cpu.registers.y = 0x00
+        self.cpu.setMemFromHexString("88", address: 0x0000)
+        _ = self.cpu.runCycles(1)
+        
+        expect(self.cpu.getProgramCounter()).to(equal(0x0001))
+        expect(self.cpu.registers.y).to(equal(0xFF))
+        expect(self.cpu.registers.getSignFlag()).to(beTrue())
+        expect(self.cpu.registers.getZeroFlag()).to(beFalse())
+    }
+    
+    func testDEYSetsZeroFlagWhenDecrementingToZero() {
+        self.cpu.registers.y = 0x01
+        self.cpu.setMemFromHexString("88", address: 0x0000)
+        _ = self.cpu.runCycles(1)
+        
+        expect(self.cpu.getProgramCounter()).to(equal(0x0001))
+        expect(self.cpu.registers.y).to(equal(0x00))
+        expect(self.cpu.registers.getSignFlag()).to(beFalse())
+        expect(self.cpu.registers.getZeroFlag()).to(beTrue())
+    }
+    
+    /* EOR Absolute */
+    
+    func testEORAbsoluteFlipsBitsOverSettingZFlag() {
+        self.cpu.setMemFromHexString("4D CD AB", address: 0x0000)
+        self.cpu.registers.a = 0xFF
+        self.cpu.setMem(0xABCD, value: 0xFF)
+        _ = self.cpu.runCycles(1)
+        
+        expect(self.cpu.getProgramCounter()).to(equal(0x0003))
+        expect(self.cpu.registers.a).to(equal(0x00))
+        expect(self.cpu.getMem(0xABCD)).to(equal(0xFF))
+        expect(self.cpu.registers.getZeroFlag()).to(beTrue())
+    }
+    
+    func testEORAbsoluteFlipsBitsOverSettingNFlag() {
+        self.cpu.setMemFromHexString("4D CD AB", address: 0x0000)
+        self.cpu.registers.a = 0x00
+        self.cpu.setMem(0xABCD, value: 0xFF)
+        _ = self.cpu.runCycles(1)
+        
+        expect(self.cpu.getProgramCounter()).to(equal(0x0003))
+        expect(self.cpu.registers.a).to(equal(0xFF))
+        expect(self.cpu.getMem(0xABCD)).to(equal(0xFF))
+        expect(self.cpu.registers.getSignFlag()).to(beTrue())
+        expect(self.cpu.registers.getZeroFlag()).to(beFalse())
+    }
+    
+    /* EOR ZP */
+    
+    func testEORZPFlipsBitsOverSettingZFlag() {
+        self.cpu.setMemFromHexString("45 10", address: 0x0000)
+        self.cpu.registers.a = 0xFF
+        self.cpu.setMem(0x10, value: 0xFF)
+        _ = self.cpu.runCycles(1)
+        
+        expect(self.cpu.getProgramCounter()).to(equal(0x0002))
+        expect(self.cpu.registers.a).to(equal(0x00))
+        expect(self.cpu.getMem(0x10)).to(equal(0xFF))
+        expect(self.cpu.registers.getZeroFlag()).to(beTrue())
+    }
+    
+    func testEORZPFlipsBitsOverSettingNFlag() {
+        self.cpu.setMemFromHexString("45 10", address: 0x0000)
+        self.cpu.registers.a = 0x00
+        self.cpu.setMem(0x10, value: 0xFF)
+        _ = self.cpu.runCycles(1)
+        
+        expect(self.cpu.getProgramCounter()).to(equal(0x0002))
+        expect(self.cpu.registers.a).to(equal(0xFF))
+        expect(self.cpu.getMem(0x10)).to(equal(0xFF))
+        expect(self.cpu.registers.getSignFlag()).to(beTrue())
+        expect(self.cpu.registers.getZeroFlag()).to(beFalse())
+    }
 
 
     /* JSR */
