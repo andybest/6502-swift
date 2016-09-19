@@ -66,8 +66,8 @@ extension CPU6502 {
     }
     
     func getIndirectY(_ address: UInt16) -> UInt8 {
-        let indirectAddress: UInt16 = address
-        return getMem((UInt16(getMem(indirectAddress)) | (UInt16(getMem(indirectAddress + 1)) << 8)) + UInt16(registers.y))
+        let indirectAddress = (UInt16(getMem(address)) | (UInt16(getMem(address + 1)) << 8)) + UInt16(registers.y)
+        return getMem(indirectAddress)
     }
     
     func getIndirectYAddress(_ address: UInt16) -> UInt16 {

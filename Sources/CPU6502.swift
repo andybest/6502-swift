@@ -126,7 +126,7 @@ class CPU6502 {
     init() {
         self.registers = Registers()
         buildInstructionTable()
-        self.reset()
+        //self.reset()
     }
 
     func reset() {
@@ -135,6 +135,8 @@ class CPU6502 {
         self.registers.setInterruptFlag(true)
         self.registers.setDecimalFlag(true)
         self.registers.setBreakFlag(true)
+        
+        self.registers.pc = getIndirectAddress(0xFFFC)
     }
 
     func printCPUState() {
@@ -299,6 +301,10 @@ class CPU6502 {
         case .indirect:
             return AddressingMode.indirect(UInt16(getMem(getProgramCounter() + 1)) | (UInt16(getMem(getProgramCounter() + 2)) << UInt16(8)))
         case .indirectX:
+            if(numBytes == 2)
+            {
+                return AddressingMode.indirectX(UInt16(getMem(getProgramCounter() + 1)))
+            }
             return AddressingMode.indirectX(UInt16(getMem(getProgramCounter() + 1)) | (UInt16(getMem(getProgramCounter() + 2)) << UInt16(8)))
         case .indirectY:
             if(numBytes == 2)
