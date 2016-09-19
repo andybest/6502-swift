@@ -167,7 +167,7 @@ class CPU6502 {
         var currentAddress = address
         for byte in data {
             setMem(currentAddress, value: byte)
-            currentAddress += 1
+            currentAddress = UInt16.addWithOverflow(currentAddress, 1).0
         }
     }
 

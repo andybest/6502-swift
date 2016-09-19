@@ -32,6 +32,7 @@ class CPUTests: XCTestCase {
     override func setUp() {
         super.setUp()
         cpu = CPU6502()
+        cpu.reset()
     }
 
     override func tearDown() {

@@ -36,16 +36,17 @@ class InstructionTests: XCTestCase {
     override func setUp() {
         super.setUp()
         cpu = CPU6502()
-        mem = [UInt8](repeating: 0x0, count: 0xFFFF)
-
+        mem = [UInt8](repeating: 0x0, count: 0x10000)
+        
         cpu.readMemoryCallback =  { (address:UInt16) -> UInt8 in
-            
             return self.mem[Int(address)]
         }
 
         cpu.writeMemoryCallback =  { (address:UInt16, value:UInt8) in
             self.mem[Int(address)] = value
         }
+        
+        cpu.reset()
     }
 
     override func tearDown() {
@@ -463,7 +464,7 @@ class InstructionTests: XCTestCase {
         self.cpu.setProgramCounter(0x0050)
         _ = self.cpu.runCycles(1)
         
-        expect(self.cpu.getProgramCounter()).to(equal(UInt16.subtractWithOverflow(0x0052, 122).0))
+        expect(self.cpu.getProgramCounter()).to(equal(UInt16.subtractWithOverflow(0x0052, 6).0))
     }
     
     func testBEQZeroClearDoesNotBranch() {
@@ -633,6 +634,217 @@ class InstructionTests: XCTestCase {
         expect(self.cpu.registers.a).to(equal(0x01))
         expect(self.cpu.getMem(0x0010)).to(equal(0x00))
     }
+    
+    /* BMI */
+    
+    func testBMINegativeSetBranchesRelativeForward() {
+        self.cpu.registers.setSignFlag(true)
+        self.cpu.setMemFromHexString("30 06", address: 0x0000)
+        _ = self.cpu.runCycles(1)
+        
+        expect(self.cpu.getProgramCounter()).to(equal(0x0002 + 0x006))
+    }
+    
+    func testBMINegativeSetBranchesRelativeBackward() {
+        self.cpu.registers.setSignFlag(true)
+        let rel = 0x06 ^ 0xFF + 1
+        self.cpu.setMem(0x0050, value:0x30)
+        self.cpu.setMem(0x0051, value:UInt8(rel))
+        self.cpu.setProgramCounter(0x0050)
+        _ = self.cpu.runCycles(1)
+        
+        expect(self.cpu.getProgramCounter()).to(equal(UInt16.subtractWithOverflow(0x0052, 6).0))
+    }
+    
+    func testBMINegativeClearDoesNotBranch() {
+        self.cpu.registers.setSignFlag(false)
+        
+        self.cpu.setMemFromHexString("30 06", address: 0x0000)
+        _ = self.cpu.runCycles(1)
+        
+        expect(self.cpu.getProgramCounter()).to(equal(0x0002))
+    }
+    
+    /* BNE */
+    
+    func testBNEZeroClearBranchesRelativeForward() {
+        self.cpu.registers.setZeroFlag(false)
+        self.cpu.setMemFromHexString("D0 06", address: 0x0000)
+        _ = self.cpu.runCycles(1)
+        
+        expect(self.cpu.getProgramCounter()).to(equal(0x0002 + 0x006))
+    }
+    
+    func testBNEZeroClearBranchesRelativeBackward() {
+        self.cpu.registers.setZeroFlag(false)
+        let rel = 0x06 ^ 0xFF + 1
+        self.cpu.setMem(0x0050, value:0xD0)
+        self.cpu.setMem(0x0051, value:UInt8(rel))
+        self.cpu.setProgramCounter(0x0050)
+        _ = self.cpu.runCycles(1)
+        
+        expect(self.cpu.getProgramCounter()).to(equal(UInt16.subtractWithOverflow(0x0052, 6).0))
+    }
+    
+    func testBNEZeroSetDoesNotBranch() {
+        self.cpu.registers.setZeroFlag(true)
+        
+        self.cpu.setMemFromHexString("D0 06", address: 0x0000)
+        _ = self.cpu.runCycles(1)
+        
+        expect(self.cpu.getProgramCounter()).to(equal(0x0002))
+    }
+    
+    /* BPL */
+    
+    func testBPLNegativeClearBranchesRelativeForward() {
+        self.cpu.registers.setSignFlag(false)
+        self.cpu.setMemFromHexString("10 06", address: 0x0000)
+        _ = self.cpu.runCycles(1)
+        
+        expect(self.cpu.getProgramCounter()).to(equal(0x0002 + 0x006))
+    }
+    
+    func testBPLNegativeClearBranchesRelativeBackward() {
+        self.cpu.registers.setSignFlag(false)
+        let rel = 0x06 ^ 0xFF + 1
+        self.cpu.setMem(0x0050, value:0x10)
+        self.cpu.setMem(0x0051, value:UInt8(rel))
+        self.cpu.setProgramCounter(0x0050)
+        _ = self.cpu.runCycles(1)
+        
+        expect(self.cpu.getProgramCounter()).to(equal(UInt16.subtractWithOverflow(0x0052, 6).0))
+    }
+    
+    func testBPLNegativeSetDoesNotBranch() {
+        self.cpu.registers.setSignFlag(true)
+        
+        self.cpu.setMemFromHexString("10 06", address: 0x0000)
+        _ = self.cpu.runCycles(1)
+        
+        expect(self.cpu.getProgramCounter()).to(equal(0x0002))
+    }
+    
+    /* BRK */
+    
+    func testBRKPushesPCPlus2AndStatusThenSetsPCToIRQVector() {
+        self.cpu.registers.setStatusByte(0x00)
+        
+        self.cpu.setMemFromHexString("CD AB", address: 0xFFFE)
+        self.cpu.setMem(0xC000, value: 0x00)
+        self.cpu.setProgramCounter(0xC000)
+        _ = self.cpu.runCycles(1)
+        
+        expect(self.cpu.getProgramCounter()).to(equal(0xABCD))
+        
+        expect(self.cpu.getMem(0x01FF)).to(equal(0xC0))
+        expect(self.cpu.getMem(0x01FE)).to(equal(0x02))
+        expect(self.cpu.getMem(0x01FD)).to(equal(0x30))
+        
+        expect(self.cpu.registers.getBreakFlag()).to(beTrue())
+        expect(self.cpu.registers.getInterruptFlag()).to(beTrue())
+    }
+    
+    /* BVC */
+    
+    func testBVCOverflowClearBranchesRelativeForward() {
+        self.cpu.registers.setOverflowFlag(false)
+        self.cpu.setMemFromHexString("50 06", address: 0x0000)
+        _ = self.cpu.runCycles(1)
+        
+        expect(self.cpu.getProgramCounter()).to(equal(0x0002 + 0x006))
+    }
+    
+    func testBVCOverflowClearBranchesRelativeBackward() {
+        self.cpu.registers.setOverflowFlag(false)
+        let rel = 0x06 ^ 0xFF + 1
+        self.cpu.setMem(0x0050, value:0x50)
+        self.cpu.setMem(0x0051, value:UInt8(rel))
+        self.cpu.setProgramCounter(0x0050)
+        _ = self.cpu.runCycles(1)
+        
+        expect(self.cpu.getProgramCounter()).to(equal(UInt16.subtractWithOverflow(0x0052, 6).0))
+    }
+    
+    func testBVCOverflowSetDoesNotBranch() {
+        self.cpu.registers.setOverflowFlag(true)
+        
+        self.cpu.setMemFromHexString("50 06", address: 0x0000)
+        _ = self.cpu.runCycles(1)
+        
+        expect(self.cpu.getProgramCounter()).to(equal(0x0002))
+    }
+    
+    /* BVS */
+    
+    func testBVSOverflowSetBranchesRelativeForward() {
+        self.cpu.registers.setOverflowFlag(true)
+        self.cpu.setMemFromHexString("70 06", address: 0x0000)
+        _ = self.cpu.runCycles(1)
+        
+        expect(self.cpu.getProgramCounter()).to(equal(0x0002 + 0x006))
+    }
+    
+    func testBVSOverflowSetBranchesRelativeBackward() {
+        self.cpu.registers.setOverflowFlag(true)
+        let rel = 0x06 ^ 0xFF + 1
+        self.cpu.setMem(0x0050, value:0x70)
+        self.cpu.setMem(0x0051, value:UInt8(rel))
+        self.cpu.setProgramCounter(0x0050)
+        _ = self.cpu.runCycles(1)
+        
+        expect(self.cpu.getProgramCounter()).to(equal(UInt16.subtractWithOverflow(0x0052, 6).0))
+    }
+    
+    func testBVSOverflowClearDoesNotBranch() {
+        self.cpu.registers.setOverflowFlag(false)
+        
+        self.cpu.setMemFromHexString("70 06", address: 0x0000)
+        _ = self.cpu.runCycles(1)
+        
+        expect(self.cpu.getProgramCounter()).to(equal(0x0002))
+    }
+    
+    /* CLC */
+    func testCLCClearsCarryFlag() {
+        self.cpu.registers.setCarryFlag(true)
+        self.cpu.setMem(0x0000, value: 0x18)
+        _ = self.cpu.runCycles(1)
+        
+        expect(self.cpu.getProgramCounter()).to(equal(0x0001))
+        expect(self.cpu.registers.getCarryFlag()).to(beFalse())
+    }
+    
+    /* CLD */
+    func testCLDClearsDecimalFlag() {
+        self.cpu.registers.setDecimalFlag(true)
+        self.cpu.setMem(0x0000, value: 0xD8)
+        _ = self.cpu.runCycles(1)
+        
+        expect(self.cpu.getProgramCounter()).to(equal(0x0001))
+        expect(self.cpu.registers.getDecimalFlag()).to(beFalse())
+    }
+    
+    /* CLI */
+    func testCLIClearsInterruptFlag() {
+        self.cpu.registers.setInterruptFlag(true)
+        self.cpu.setMem(0x0000, value: 0x58)
+        _ = self.cpu.runCycles(1)
+        
+        expect(self.cpu.getProgramCounter()).to(equal(0x0001))
+        expect(self.cpu.registers.getInterruptFlag()).to(beFalse())
+    }
+    
+    /* CLV */
+    func testCLVClearsOverflowFlag() {
+        self.cpu.registers.setOverflowFlag(true)
+        self.cpu.setMem(0x0000, value: 0xB8)
+        _ = self.cpu.runCycles(1)
+        
+        expect(self.cpu.getProgramCounter()).to(equal(0x0001))
+        expect(self.cpu.registers.getOverflowFlag()).to(beFalse())
+    }
+
 
     /* JSR */
 
