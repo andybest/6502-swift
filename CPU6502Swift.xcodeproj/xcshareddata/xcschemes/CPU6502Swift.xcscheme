@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "9999"
+   LastUpgradeVersion = "0800"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -32,13 +32,22 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "______Target_CPU6502Tests"
+               BlueprintIdentifier = "A55D3D8F1D9032BD00BC0C75"
                BuildableName = "CPU6502Tests.xctest"
                BlueprintName = "CPU6502Tests"
                ReferencedContainer = "container:CPU6502Swift.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "______Target_CPU6502Swift"
+            BuildableName = "CPU6502Swift.framework"
+            BlueprintName = "CPU6502Swift"
+            ReferencedContainer = "container:CPU6502Swift.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </TestAction>
@@ -70,6 +79,15 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "______Target_CPU6502Swift"
+            BuildableName = "CPU6502Swift.framework"
+            BlueprintName = "CPU6502Swift"
+            ReferencedContainer = "container:CPU6502Swift.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		23BD1801D120AEFFEC897EDB /* Pods_CPU6502Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4625755318E0FE4010C3A6E6 /* Pods_CPU6502Tests.framework */; };
 		A5170ACE1D873B1D00D1C8B3 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5170ACD1D873B1D00D1C8B3 /* main.swift */; };
 		A5170AD21D873B3900D1C8B3 /* CPU6502.swift in Sources */ = {isa = PBXBuildFile; fileRef = __PBXFileRef_Sources/CPU6502.swift /* CPU6502.swift */; };
 		A5170AD31D873B3900D1C8B3 /* CPUOperations.swift in Sources */ = {isa = PBXBuildFile; fileRef = __PBXFileRef_Sources/CPUOperations.swift /* CPUOperations.swift */; };
@@ -15,23 +16,33 @@
 		A5170AD61D873B3900D1C8B3 /* Registers.swift in Sources */ = {isa = PBXBuildFile; fileRef = __PBXFileRef_Sources/Registers.swift /* Registers.swift */; };
 		A5170AD71D873B3900D1C8B3 /* String+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = "__PBXFileRef_Sources/String+Hex.swift" /* String+Hex.swift */; };
 		A5170ADC1D87548100D1C8B3 /* 6502_functional_test.hex in CopyFiles */ = {isa = PBXBuildFile; fileRef = A5170AD91D87545C00D1C8B3 /* 6502_functional_test.hex */; };
-		A5743A511D82FEDE007D86EC /* CPU6502.swift in Sources */ = {isa = PBXBuildFile; fileRef = __PBXFileRef_Sources/CPU6502.swift /* CPU6502.swift */; };
-		A5743A521D82FEDE007D86EC /* CPUOperations.swift in Sources */ = {isa = PBXBuildFile; fileRef = __PBXFileRef_Sources/CPUOperations.swift /* CPUOperations.swift */; };
-		A5743A531D82FEDE007D86EC /* Disassembler.swift in Sources */ = {isa = PBXBuildFile; fileRef = __PBXFileRef_Sources/Disassembler.swift /* Disassembler.swift */; };
-		A5743A541D82FEDE007D86EC /* InstructionTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = __PBXFileRef_Sources/InstructionTable.swift /* InstructionTable.swift */; };
-		A5743A551D82FEDE007D86EC /* Registers.swift in Sources */ = {isa = PBXBuildFile; fileRef = __PBXFileRef_Sources/Registers.swift /* Registers.swift */; };
-		A5743A561D82FEDE007D86EC /* String+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = "__PBXFileRef_Sources/String+Hex.swift" /* String+Hex.swift */; };
-		FE578AABDFA4195995C8D682 /* Pods_CPU6502Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4625755318E0FE4010C3A6E6 /* Pods_CPU6502Tests.framework */; };
+		A55D3D951D9032BD00BC0C75 /* CPU6502Swift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "_____Product_CPU6502Swift" /* CPU6502Swift.framework */; };
+		A55D3D9B1D9032CA00BC0C75 /* CPUTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = __PBXFileRef_Tests/CPU6502Tests/CPUTests.swift /* CPUTests.swift */; };
+		A55D3D9C1D9032CA00BC0C75 /* InstructionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = __PBXFileRef_Tests/CPU6502Tests/InstructionTests.swift /* InstructionTests.swift */; };
+		A55D3D9D1D9032CA00BC0C75 /* RegistersTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = __PBXFileRef_Tests/CPU6502Tests/RegistersTests.swift /* RegistersTests.swift */; };
+		A55D3D9E1D90333100BC0C75 /* CPU6502.swift in Sources */ = {isa = PBXBuildFile; fileRef = __PBXFileRef_Sources/CPU6502.swift /* CPU6502.swift */; };
+		A55D3D9F1D90333100BC0C75 /* CPUOperations.swift in Sources */ = {isa = PBXBuildFile; fileRef = __PBXFileRef_Sources/CPUOperations.swift /* CPUOperations.swift */; };
+		A55D3DA01D90333100BC0C75 /* Disassembler.swift in Sources */ = {isa = PBXBuildFile; fileRef = __PBXFileRef_Sources/Disassembler.swift /* Disassembler.swift */; };
+		A55D3DA11D90333100BC0C75 /* InstructionTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = __PBXFileRef_Sources/InstructionTable.swift /* InstructionTable.swift */; };
+		A55D3DA21D90333100BC0C75 /* Registers.swift in Sources */ = {isa = PBXBuildFile; fileRef = __PBXFileRef_Sources/Registers.swift /* Registers.swift */; };
+		A55D3DA31D90333100BC0C75 /* String+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = "__PBXFileRef_Sources/String+Hex.swift" /* String+Hex.swift */; };
 		__src_cc_ref_Sources/CPU6502.swift /* CPU6502.swift in Sources */ = {isa = PBXBuildFile; fileRef = __PBXFileRef_Sources/CPU6502.swift /* CPU6502.swift */; };
 		__src_cc_ref_Sources/CPUOperations.swift /* CPUOperations.swift in Sources */ = {isa = PBXBuildFile; fileRef = __PBXFileRef_Sources/CPUOperations.swift /* CPUOperations.swift */; };
 		__src_cc_ref_Sources/Disassembler.swift /* Disassembler.swift in Sources */ = {isa = PBXBuildFile; fileRef = __PBXFileRef_Sources/Disassembler.swift /* Disassembler.swift */; };
 		__src_cc_ref_Sources/InstructionTable.swift /* InstructionTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = __PBXFileRef_Sources/InstructionTable.swift /* InstructionTable.swift */; };
 		__src_cc_ref_Sources/Registers.swift /* Registers.swift in Sources */ = {isa = PBXBuildFile; fileRef = __PBXFileRef_Sources/Registers.swift /* Registers.swift */; };
 		"__src_cc_ref_Sources/String+Hex.swift" /* String+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = "__PBXFileRef_Sources/String+Hex.swift" /* String+Hex.swift */; };
-		__src_cc_ref_Tests/CPU6502Tests/CPUTests.swift /* CPUTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = __PBXFileRef_Tests/CPU6502Tests/CPUTests.swift /* CPUTests.swift */; };
-		__src_cc_ref_Tests/CPU6502Tests/InstructionTests.swift /* InstructionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = __PBXFileRef_Tests/CPU6502Tests/InstructionTests.swift /* InstructionTests.swift */; };
-		__src_cc_ref_Tests/CPU6502Tests/RegistersTests.swift /* RegistersTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = __PBXFileRef_Tests/CPU6502Tests/RegistersTests.swift /* RegistersTests.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		A55D3D961D9032BD00BC0C75 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = __RootObject_ /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = "______Target_CPU6502Swift";
+			remoteInfo = CPU6502Swift;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		A5170AC91D873B1D00D1C8B3 /* CopyFiles */ = {
@@ -54,6 +65,8 @@
 		A5170ACD1D873B1D00D1C8B3 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		A5170AD91D87545C00D1C8B3 /* 6502_functional_test.hex */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 6502_functional_test.hex; sourceTree = "<group>"; };
 		A5170ADA1D87545C00D1C8B3 /* 6502_functional_test.lst */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 6502_functional_test.lst; sourceTree = "<group>"; };
+		A55D3D901D9032BD00BC0C75 /* CPU6502Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CPU6502Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		A55D3DA41D90337700BC0C75 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		__PBXFileRef_CPU6502Swift.xcodeproj/Configs/Project.xcconfig /* CPU6502Swift.xcodeproj/Configs/Project.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = CPU6502Swift.xcodeproj/Configs/Project.xcconfig; sourceTree = "<group>"; };
 		__PBXFileRef_Package.swift /* Package.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
 		__PBXFileRef_Sources/CPU6502.swift /* CPU6502.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CPU6502.swift; sourceTree = "<group>"; };
@@ -66,7 +79,6 @@
 		__PBXFileRef_Tests/CPU6502Tests/InstructionTests.swift /* InstructionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstructionTests.swift; sourceTree = "<group>"; };
 		__PBXFileRef_Tests/CPU6502Tests/RegistersTests.swift /* RegistersTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistersTests.swift; sourceTree = "<group>"; };
 		"_____Product_CPU6502Swift" /* CPU6502Swift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = CPU6502Swift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		"_____Product_CPU6502Tests" /* CPU6502Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; path = CPU6502Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,18 +89,19 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		A55D3D8D1D9032BD00BC0C75 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A55D3D951D9032BD00BC0C75 /* CPU6502Swift.framework in Frameworks */,
+				23BD1801D120AEFFEC897EDB /* Pods_CPU6502Tests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		"___LinkPhase_CPU6502Swift" /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 0;
 			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		"___LinkPhase_CPU6502Tests" /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 0;
-			files = (
-				FE578AABDFA4195995C8D682 /* Pods_CPU6502Tests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -133,7 +146,6 @@
 		TestProducts_ /* Tests */ = {
 			isa = PBXGroup;
 			children = (
-				"_____Product_CPU6502Tests" /* CPU6502Tests.xctest */,
 			);
 			name = Tests;
 			sourceTree = "<group>";
@@ -158,6 +170,7 @@
 				TestProducts_ /* Tests */,
 				"_____Product_CPU6502Swift" /* CPU6502Swift.framework */,
 				A5170ACB1D873B1D00D1C8B3 /* Test6502 */,
+				A55D3D901D9032BD00BC0C75 /* CPU6502Tests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -195,6 +208,7 @@
 		"_______Group_CPU6502Tests" /* CPU6502Tests */ = {
 			isa = PBXGroup;
 			children = (
+				A55D3DA41D90337700BC0C75 /* Info.plist */,
 				__PBXFileRef_Tests/CPU6502Tests/CPUTests.swift /* CPUTests.swift */,
 				__PBXFileRef_Tests/CPU6502Tests/InstructionTests.swift /* InstructionTests.swift */,
 				__PBXFileRef_Tests/CPU6502Tests/RegistersTests.swift /* RegistersTests.swift */,
@@ -231,6 +245,27 @@
 			productReference = A5170ACB1D873B1D00D1C8B3 /* Test6502 */;
 			productType = "com.apple.product-type.tool";
 		};
+		A55D3D8F1D9032BD00BC0C75 /* CPU6502Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A55D3D981D9032BD00BC0C75 /* Build configuration list for PBXNativeTarget "CPU6502Tests" */;
+			buildPhases = (
+				D33C7B2A2423546CA960FA96 /* 📦 Check Pods Manifest.lock */,
+				A55D3D8C1D9032BD00BC0C75 /* Sources */,
+				A55D3D8D1D9032BD00BC0C75 /* Frameworks */,
+				A55D3D8E1D9032BD00BC0C75 /* Resources */,
+				5678C44D88205EA7708A8697 /* 📦 Embed Pods Frameworks */,
+				FC81E8BCF28A5568712CF571 /* 📦 Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A55D3D971D9032BD00BC0C75 /* PBXTargetDependency */,
+			);
+			name = CPU6502Tests;
+			productName = CPU6502SwiftTests;
+			productReference = A55D3D901D9032BD00BC0C75 /* CPU6502Tests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		"______Target_CPU6502Swift" /* CPU6502Swift */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = "_______Confs_CPU6502Swift" /* Build configuration list for PBXNativeTarget "CPU6502Swift" */;
@@ -247,25 +282,6 @@
 			productReference = "_____Product_CPU6502Swift" /* CPU6502Swift.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		"______Target_CPU6502Tests" /* CPU6502Tests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = "_______Confs_CPU6502Tests" /* Build configuration list for PBXNativeTarget "CPU6502Tests" */;
-			buildPhases = (
-				7880FE3B41630F042237B749 /* 📦 Check Pods Manifest.lock */,
-				CompilePhase_CPU6502Tests /* Sources */,
-				"___LinkPhase_CPU6502Tests" /* Frameworks */,
-				B56B04DF6E7EEC1837FE6FF2 /* 📦 Embed Pods Frameworks */,
-				FD32A05911EE4D496BC0EC13 /* 📦 Copy Pods Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = CPU6502Tests;
-			productName = CPU6502Tests;
-			productReference = "_____Product_CPU6502Tests" /* CPU6502Tests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -277,6 +293,11 @@
 				TargetAttributes = {
 					A5170ACA1D873B1D00D1C8B3 = {
 						CreatedOnToolsVersion = 8.0;
+						ProvisioningStyle = Automatic;
+					};
+					A55D3D8F1D9032BD00BC0C75 = {
+						CreatedOnToolsVersion = 8.0;
+						DevelopmentTeam = 6T385VPU57;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -294,29 +315,24 @@
 			projectRoot = "";
 			targets = (
 				"______Target_CPU6502Swift" /* CPU6502Swift */,
-				"______Target_CPU6502Tests" /* CPU6502Tests */,
 				A5170ACA1D873B1D00D1C8B3 /* Test6502 */,
+				A55D3D8F1D9032BD00BC0C75 /* CPU6502Tests */,
 			);
 		};
 /* End PBXProject section */
 
-/* Begin PBXShellScriptBuildPhase section */
-		7880FE3B41630F042237B749 /* 📦 Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
+/* Begin PBXResourcesBuildPhase section */
+		A55D3D8E1D9032BD00BC0C75 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputPaths = (
-			);
-			name = "📦 Check Pods Manifest.lock";
-			outputPaths = (
-			);
 			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
 		};
-		B56B04DF6E7EEC1837FE6FF2 /* 📦 Embed Pods Frameworks */ = {
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		5678C44D88205EA7708A8697 /* 📦 Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -331,7 +347,22 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CPU6502Tests/Pods-CPU6502Tests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		FD32A05911EE4D496BC0EC13 /* 📦 Copy Pods Resources */ = {
+		D33C7B2A2423546CA960FA96 /* 📦 Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		FC81E8BCF28A5568712CF571 /* 📦 Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -363,6 +394,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		A55D3D8C1D9032BD00BC0C75 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A55D3D9E1D90333100BC0C75 /* CPU6502.swift in Sources */,
+				A55D3DA21D90333100BC0C75 /* Registers.swift in Sources */,
+				A55D3DA31D90333100BC0C75 /* String+Hex.swift in Sources */,
+				A55D3D9C1D9032CA00BC0C75 /* InstructionTests.swift in Sources */,
+				A55D3D9F1D90333100BC0C75 /* CPUOperations.swift in Sources */,
+				A55D3DA11D90333100BC0C75 /* InstructionTable.swift in Sources */,
+				A55D3D9B1D9032CA00BC0C75 /* CPUTests.swift in Sources */,
+				A55D3DA01D90333100BC0C75 /* Disassembler.swift in Sources */,
+				A55D3D9D1D9032CA00BC0C75 /* RegistersTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		CompilePhase_CPU6502Swift /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 0;
@@ -376,23 +423,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		CompilePhase_CPU6502Tests /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 0;
-			files = (
-				A5743A511D82FEDE007D86EC /* CPU6502.swift in Sources */,
-				A5743A521D82FEDE007D86EC /* CPUOperations.swift in Sources */,
-				A5743A531D82FEDE007D86EC /* Disassembler.swift in Sources */,
-				A5743A541D82FEDE007D86EC /* InstructionTable.swift in Sources */,
-				A5743A551D82FEDE007D86EC /* Registers.swift in Sources */,
-				A5743A561D82FEDE007D86EC /* String+Hex.swift in Sources */,
-				__src_cc_ref_Tests/CPU6502Tests/CPUTests.swift /* CPUTests.swift in Sources */,
-				__src_cc_ref_Tests/CPU6502Tests/InstructionTests.swift /* InstructionTests.swift in Sources */,
-				__src_cc_ref_Tests/CPU6502Tests/RegistersTests.swift /* RegistersTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		A55D3D971D9032BD00BC0C75 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = "______Target_CPU6502Swift" /* CPU6502Swift */;
+			targetProxy = A55D3D961D9032BD00BC0C75 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		A5170ACF1D873B1D00D1C8B3 /* Debug */ = {
@@ -487,6 +526,81 @@
 			};
 			name = Release;
 		};
+		A55D3D991D9032BD00BC0C75 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 266CE1A3534B2102A0AA82B5 /* Pods-CPU6502Tests.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 6T385VPU57;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				INFOPLIST_FILE = Tests/CPU6502Tests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = net.andybest.CPU6502Tests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		A55D3D9A1D9032BD00BC0C75 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5858855BEAF963D67B0494EF /* Pods-CPU6502Tests.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 6T385VPU57;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				INFOPLIST_FILE = Tests/CPU6502Tests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = net.andybest.CPU6502Tests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
 		_ReleaseConf_CPU6502Swift /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -499,15 +613,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = CPU6502Swift;
 				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				SWIFT_VERSION = 3.0;
-			};
-			name = Release;
-		};
-		_ReleaseConf_CPU6502Tests /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5858855BEAF963D67B0494EF /* Pods-CPU6502Tests.release.xcconfig */;
-			buildSettings = {
-				INFOPLIST_FILE = CPU6502Swift.xcodeproj/CPU6502Tests_Info.plist;
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
@@ -529,20 +634,28 @@
 			};
 			name = Debug;
 		};
-		"___DebugConf_CPU6502Tests" /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 266CE1A3534B2102A0AA82B5 /* Pods-CPU6502Tests.debug.xcconfig */;
-			buildSettings = {
-				INFOPLIST_FILE = CPU6502Swift.xcodeproj/CPU6502Tests_Info.plist;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 3.0;
-			};
-			name = Debug;
-		};
 		"_____Release_" /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = __PBXFileRef_CPU6502Swift.xcodeproj/Configs/Project.xcconfig /* CPU6502Swift.xcodeproj/Configs/Project.xcconfig */;
 			buildSettings = {
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 			};
 			name = Release;
 		};
@@ -550,6 +663,25 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = __PBXFileRef_CPU6502Swift.xcodeproj/Configs/Project.xcconfig /* CPU6502Swift.xcodeproj/Configs/Project.xcconfig */;
 			buildSettings = {
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				ONLY_ACTIVE_ARCH = YES;
 			};
 			name = Debug;
 		};
@@ -563,6 +695,16 @@
 				A5170AD01D873B1D00D1C8B3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		A55D3D981D9032BD00BC0C75 /* Build configuration list for PBXNativeTarget "CPU6502Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A55D3D991D9032BD00BC0C75 /* Debug */,
+				A55D3D9A1D9032BD00BC0C75 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
 		};
 		"___RootConfs_" /* Build configuration list for PBXProject "CPU6502Swift" */ = {
 			isa = XCConfigurationList;
@@ -578,15 +720,6 @@
 			buildConfigurations = (
 				"___DebugConf_CPU6502Swift" /* Debug */,
 				_ReleaseConf_CPU6502Swift /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Debug;
-		};
-		"_______Confs_CPU6502Tests" /* Build configuration list for PBXNativeTarget "CPU6502Tests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				"___DebugConf_CPU6502Tests" /* Debug */,
-				_ReleaseConf_CPU6502Tests /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
