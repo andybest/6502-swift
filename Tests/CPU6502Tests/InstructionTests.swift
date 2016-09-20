@@ -1788,7 +1788,132 @@ class InstructionTests: XCTestCase {
         expect(self.cpu.registers.getSignFlag()).to(beFalse())
         expect(self.cpu.registers.getZeroFlag()).to(beTrue())
     }
+    
+    
+    /* LDX Absolute */
+    
+    func testLDXAbsoluteLoadsXSetsNFlag() {
+        self.cpu.registers.x = 0x00
+        self.cpu.setMemFromHexString("AE CD AB", address: 0x0000)
+        self.cpu.setMemFromHexString("80", address: 0xABCD)
+        _ = cpu.runCycles(1)
+        
+        expect(self.cpu.getProgramCounter()).to(equal(0x0003))
+        expect(self.cpu.registers.x).to(equal(0x80))
+        expect(self.cpu.registers.getSignFlag()).to(beTrue())
+        expect(self.cpu.registers.getZeroFlag()).to(beFalse())
+    }
+    
+    func testLDXAbsoluteLoadsXSetsZFlag() {
+        self.cpu.registers.x = 0xFF
+        self.cpu.setMemFromHexString("AE CD AB", address: 0x0000)
+        self.cpu.setMemFromHexString("00", address: 0xABCD)
+        _ = cpu.runCycles(1)
+        
+        expect(self.cpu.getProgramCounter()).to(equal(0x0003))
+        expect(self.cpu.registers.x).to(equal(0x00))
+        expect(self.cpu.registers.getSignFlag()).to(beFalse())
+        expect(self.cpu.registers.getZeroFlag()).to(beTrue())
+    }
+    
+    
+    /* LDX ZP */
+    
+    func testLDXZPLoadsXSetsNFlag() {
+        self.cpu.registers.x = 0x00
+        self.cpu.setMemFromHexString("A6 10", address: 0x0000)
+        self.cpu.setMemFromHexString("80", address: 0x0010)
+        _ = cpu.runCycles(1)
+        
+        expect(self.cpu.getProgramCounter()).to(equal(0x0002))
+        expect(self.cpu.registers.x).to(equal(0x80))
+        expect(self.cpu.registers.getSignFlag()).to(beTrue())
+        expect(self.cpu.registers.getZeroFlag()).to(beFalse())
+    }
+    
+    func testLDXZPLoadsXSetsZFlag() {
+        self.cpu.registers.x = 0xFF
+        self.cpu.setMemFromHexString("A6 10", address: 0x0000)
+        self.cpu.setMemFromHexString("00", address: 0x0010)
+        _ = cpu.runCycles(1)
+        
+        expect(self.cpu.getProgramCounter()).to(equal(0x0002))
+        expect(self.cpu.registers.x).to(equal(0x00))
+        expect(self.cpu.registers.getSignFlag()).to(beFalse())
+        expect(self.cpu.registers.getZeroFlag()).to(beTrue())
+    }
+    
+    
+    /* LDX Immediate */
+    
+    func testLDXImmediateLoadsXSetsNFlag() {
+        self.cpu.registers.x = 0x00
+        self.cpu.setMemFromHexString("A2 80", address: 0x0000)
+        _ = cpu.runCycles(1)
+        
+        expect(self.cpu.getProgramCounter()).to(equal(0x0002))
+        expect(self.cpu.registers.x).to(equal(0x80))
+        expect(self.cpu.registers.getSignFlag()).to(beTrue())
+        expect(self.cpu.registers.getZeroFlag()).to(beFalse())
+    }
+    
+    func testLDXImmediateLoadsXSetsZFlag() {
+        self.cpu.registers.x = 0xFF
+        self.cpu.setMemFromHexString("A2 00", address: 0x0000)
+        _ = cpu.runCycles(1)
+        
+        expect(self.cpu.getProgramCounter()).to(equal(0x0002))
+        expect(self.cpu.registers.x).to(equal(0x00))
+        expect(self.cpu.registers.getSignFlag()).to(beFalse())
+        expect(self.cpu.registers.getZeroFlag()).to(beTrue())
+    }
 
+    
+    /* PHA */
+    
+    func testPHAPushesAAndUpdatesSP() {
+        self.cpu.registers.a = 0xAB
+        self.cpu.setMemFromHexString("48", address: 0x0000)
+        _ = self.cpu.runCycles(1)
+        
+        expect(self.cpu.getProgramCounter()).to(equal(0x0001))
+        expect(self.cpu.registers.a).to(equal(0xAB))
+        expect(self.cpu.getMem(0x01FF)).to(equal(0xAB))
+        expect(self.cpu.registers.s).to(equal(0xFE))
+    }
+    
+    /* PHP */
+    
+    func testPHPPushesProcessorStatusAndUpdatesSP() {
+        for flags in 0x00..<0x100 {
+            let bf = UInt8(1 << 4)
+            let unused = UInt8(1 << 5)
+            
+            self.cpu.reset()
+            self.cpu.registers.setStatusByte(UInt8(flags) | bf | unused)
+            
+            self.cpu.setMemFromHexString("08", address: 0x0000)
+            _ = cpu.runCycles(1)
+            
+            expect(self.cpu.getProgramCounter()).to(equal(0x0001))
+            expect(self.cpu.getMem(0x1FF)).to(equal(UInt8(flags) | bf | unused))
+            expect(self.cpu.registers.s).to(equal(0xFE))
+        }
+    }
+    
+    
+    /* PLP */
+    
+    func testPLPPullsTopByteFromStackIntoAAndUpdatesSP() {
+        self.cpu.setMemFromHexString("28", address: 0x0000)
+        self.cpu.setMemFromHexString("BA", address: 0x01FF)
+        self.cpu.registers.s = 0xFE
+        _ = self.cpu.runCycles(1)
+        
+        expect(self.cpu.getProgramCounter()).to(equal(0x0001))
+        expect(self.cpu.registers.p).to(equal(0xBA))
+        expect(self.cpu.registers.s).to(equal(0xFF))
+    }
 
     
     /* RTS */

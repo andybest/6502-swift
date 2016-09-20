@@ -515,7 +515,8 @@ extension CPU6502 {
     }
     
     func opPLP(_ mode: AddressingMode) -> InstructionResponse {
-        registers.setStatusByte(pop8())
+        let val = pop8()
+        registers.setStatusByte(val)
         return defaultResponse()
     }
     
