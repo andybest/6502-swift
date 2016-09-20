@@ -412,7 +412,7 @@ extension CPU6502 {
     
     func opINC(_ mode: AddressingMode) -> InstructionResponse {
         let value = valueForAddressingMode(mode)
-        let result = value + 1
+        let result = UInt8.addWithOverflow(value, 1).0
         registers.setZeroFlag(calculateZero(UInt16(result)))
         registers.setSignFlag(calculateSign(UInt16(result)))
         setValueForAddressingMode(UInt8(result & 0xFF), mode: mode)
