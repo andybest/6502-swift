@@ -1540,6 +1540,257 @@ class InstructionTests: XCTestCase {
         expect(self.mem[0x01FE]).to(equal(0x02))
     }
     
+    
+    /* LDA Absolute */
+    
+    func testLDAAbsoluteLoadsASetsNFlag() {
+        self.cpu.registers.a = 0x00
+        self.cpu.setMemFromHexString("AD CD AB", address: 0x0000)
+        self.cpu.setMemFromHexString("80", address: 0xABCD)
+        _ = cpu.runCycles(1)
+        
+        expect(self.cpu.getProgramCounter()).to(equal(0x0003))
+        expect(self.cpu.registers.a).to(equal(0x80))
+        expect(self.cpu.registers.getSignFlag()).to(beTrue())
+        expect(self.cpu.registers.getZeroFlag()).to(beFalse())
+    }
+    
+    func testLDAAbsoluteLoadsASetsZFlag() {
+        self.cpu.registers.a = 0x00
+        self.cpu.setMemFromHexString("AD CD AB", address: 0x0000)
+        self.cpu.setMemFromHexString("00", address: 0xABCD)
+        _ = cpu.runCycles(1)
+        
+        expect(self.cpu.getProgramCounter()).to(equal(0x0003))
+        expect(self.cpu.registers.a).to(equal(0x00))
+        expect(self.cpu.registers.getSignFlag()).to(beFalse())
+        expect(self.cpu.registers.getZeroFlag()).to(beTrue())
+    }
+    
+    
+    /* LDA ZP */
+    
+    func testLDAZPLoadsASetsNFlag() {
+        self.cpu.registers.a = 0x00
+        self.cpu.setMemFromHexString("A5 10", address: 0x0000)
+        self.cpu.setMemFromHexString("80", address: 0x0010)
+        _ = cpu.runCycles(1)
+        
+        expect(self.cpu.getProgramCounter()).to(equal(0x0002))
+        expect(self.cpu.registers.a).to(equal(0x80))
+        expect(self.cpu.registers.getSignFlag()).to(beTrue())
+        expect(self.cpu.registers.getZeroFlag()).to(beFalse())
+    }
+    
+    func testLDAZPLoadsASetsZFlag() {
+        self.cpu.registers.a = 0x00
+        self.cpu.setMemFromHexString("A5 10", address: 0x0000)
+        self.cpu.setMemFromHexString("00", address: 0x0010)
+        _ = cpu.runCycles(1)
+        
+        expect(self.cpu.getProgramCounter()).to(equal(0x0002))
+        expect(self.cpu.registers.a).to(equal(0x00))
+        expect(self.cpu.registers.getSignFlag()).to(beFalse())
+        expect(self.cpu.registers.getZeroFlag()).to(beTrue())
+    }
+    
+    
+    /* LDA Immediate */
+    
+    func testLDAImmediateLoadsASetsNFlag() {
+        self.cpu.registers.a = 0x00
+        self.cpu.setMemFromHexString("A9 80", address: 0x0000)
+        _ = cpu.runCycles(1)
+        
+        expect(self.cpu.getProgramCounter()).to(equal(0x0002))
+        expect(self.cpu.registers.a).to(equal(0x80))
+        expect(self.cpu.registers.getSignFlag()).to(beTrue())
+        expect(self.cpu.registers.getZeroFlag()).to(beFalse())
+    }
+    
+    func testLDAImmediateLoadsASetsZFlag() {
+        self.cpu.registers.a = 0x00
+        self.cpu.setMemFromHexString("A9 00", address: 0x0000)
+        _ = cpu.runCycles(1)
+        
+        expect(self.cpu.getProgramCounter()).to(equal(0x0002))
+        expect(self.cpu.registers.a).to(equal(0x00))
+        expect(self.cpu.registers.getSignFlag()).to(beFalse())
+        expect(self.cpu.registers.getZeroFlag()).to(beTrue())
+    }
+    
+    
+    /* LDA Absolute X */
+    
+    func testLDAAbsoluteXLoadsASetsNFlag() {
+        self.cpu.registers.a = 0x00
+        self.cpu.registers.x = 0x03
+        self.cpu.setMemFromHexString("BD CD AB", address: 0x0000)
+        self.cpu.setMemFromHexString("80", address: 0xABCD + 0x03)
+        _ = cpu.runCycles(1)
+        
+        expect(self.cpu.getProgramCounter()).to(equal(0x0003))
+        expect(self.cpu.registers.a).to(equal(0x80))
+        expect(self.cpu.registers.getSignFlag()).to(beTrue())
+        expect(self.cpu.registers.getZeroFlag()).to(beFalse())
+    }
+    
+    func testLDAAbsoluteXLoadsASetsZFlag() {
+        self.cpu.registers.a = 0x00
+        self.cpu.registers.x = 0x03
+        self.cpu.setMemFromHexString("BD CD AB", address: 0x0000)
+        self.cpu.setMemFromHexString("00", address: 0xABCD + 0x03)
+        _ = cpu.runCycles(1)
+        
+        expect(self.cpu.getProgramCounter()).to(equal(0x0003))
+        expect(self.cpu.registers.a).to(equal(0x00))
+        expect(self.cpu.registers.getSignFlag()).to(beFalse())
+        expect(self.cpu.registers.getZeroFlag()).to(beTrue())
+    }
+    
+    func testLDAAbsoluteXDoesNotPageWrap() {
+        self.cpu.registers.a = 0x00
+        self.cpu.registers.x = 0xFF
+        self.cpu.setMemFromHexString("BD 80 00", address: 0x0000)
+        self.cpu.setMemFromHexString("42", address: 0x0080 + 0xFF)
+        _ = cpu.runCycles(1)
+        
+        expect(self.cpu.getProgramCounter()).to(equal(0x0003))
+        expect(self.cpu.registers.a).to(equal(0x42))
+    }
+    
+    
+    /* LDA Absolute Y */
+    
+    func testLDAAbsoluteYLoadsASetsNFlag() {
+        self.cpu.registers.a = 0x00
+        self.cpu.registers.y = 0x03
+        self.cpu.setMemFromHexString("B9 CD AB", address: 0x0000)
+        self.cpu.setMemFromHexString("80", address: 0xABCD + 0x03)
+        _ = cpu.runCycles(1)
+        
+        expect(self.cpu.getProgramCounter()).to(equal(0x0003))
+        expect(self.cpu.registers.a).to(equal(0x80))
+        expect(self.cpu.registers.getSignFlag()).to(beTrue())
+        expect(self.cpu.registers.getZeroFlag()).to(beFalse())
+    }
+    
+    func testLDAAbsoluteYLoadsASetsZFlag() {
+        self.cpu.registers.a = 0x00
+        self.cpu.registers.y = 0x03
+        self.cpu.setMemFromHexString("B9 CD AB", address: 0x0000)
+        self.cpu.setMemFromHexString("00", address: 0xABCD + 0x03)
+        _ = cpu.runCycles(1)
+        
+        expect(self.cpu.getProgramCounter()).to(equal(0x0003))
+        expect(self.cpu.registers.a).to(equal(0x00))
+        expect(self.cpu.registers.getSignFlag()).to(beFalse())
+        expect(self.cpu.registers.getZeroFlag()).to(beTrue())
+    }
+    
+    func testLDAAbsoluteYDoesNotPageWrap() {
+        self.cpu.registers.a = 0x00
+        self.cpu.registers.y = 0xFF
+        self.cpu.setMemFromHexString("B9 80 00", address: 0x0000)
+        self.cpu.setMemFromHexString("42", address: 0x0080 + 0xFF)
+        _ = cpu.runCycles(1)
+        
+        expect(self.cpu.getProgramCounter()).to(equal(0x0003))
+        expect(self.cpu.registers.a).to(equal(0x42))
+    }
+    
+    /* LDA Indirect X */
+    
+    func testLDAIndirectXLoadsASetsNFlag() {
+        self.cpu.registers.a = 0x00
+        self.cpu.registers.x = 0x03
+        self.cpu.setMemFromHexString("A1 10", address: 0x0000)
+        self.cpu.setMemFromHexString("CD AB", address: 0x0013)
+        self.cpu.setMemFromHexString("80", address: 0xABCD)
+        _ = cpu.runCycles(1)
+        
+        expect(self.cpu.getProgramCounter()).to(equal(0x0002))
+        expect(self.cpu.registers.a).to(equal(0x80))
+        expect(self.cpu.registers.getSignFlag()).to(beTrue())
+        expect(self.cpu.registers.getZeroFlag()).to(beFalse())
+    }
+    
+    func testLDAIndirectXLoadsASetsZFlag() {
+        self.cpu.registers.a = 0x00
+        self.cpu.registers.x = 0x03
+        self.cpu.setMemFromHexString("A1 10", address: 0x0000)
+        self.cpu.setMemFromHexString("CD AB", address: 0x0013)
+        self.cpu.setMemFromHexString("00", address: 0xABCD)
+        _ = cpu.runCycles(1)
+        
+        expect(self.cpu.getProgramCounter()).to(equal(0x0002))
+        expect(self.cpu.registers.a).to(equal(0x00))
+        expect(self.cpu.registers.getSignFlag()).to(beFalse())
+        expect(self.cpu.registers.getZeroFlag()).to(beTrue())
+    }
+    
+    
+    /* LDA Indirect Y */
+    
+    func testLDAIndirectYLoadsASetsNFlag() {
+        self.cpu.registers.a = 0x00
+        self.cpu.registers.y = 0x03
+        self.cpu.setMemFromHexString("B1 10", address: 0x0000)
+        self.cpu.setMemFromHexString("CD AB", address: 0x0010)
+        self.cpu.setMemFromHexString("80", address: 0xABCD + 0x03)
+        _ = cpu.runCycles(1)
+        
+        expect(self.cpu.getProgramCounter()).to(equal(0x0002))
+        expect(self.cpu.registers.a).to(equal(0x80))
+        expect(self.cpu.registers.getSignFlag()).to(beTrue())
+        expect(self.cpu.registers.getZeroFlag()).to(beFalse())
+    }
+    
+    func testLDAIndirectYLoadsASetsZFlag() {
+        self.cpu.registers.a = 0x00
+        self.cpu.registers.y = 0x03
+        self.cpu.setMemFromHexString("B1 10", address: 0x0000)
+        self.cpu.setMemFromHexString("CD AB", address: 0x0010)
+        self.cpu.setMemFromHexString("00", address: 0xABCD + 0x03)
+        _ = cpu.runCycles(1)
+        
+        expect(self.cpu.getProgramCounter()).to(equal(0x0002))
+        expect(self.cpu.registers.a).to(equal(0x00))
+        expect(self.cpu.registers.getSignFlag()).to(beFalse())
+        expect(self.cpu.registers.getZeroFlag()).to(beTrue())
+    }
+    
+    
+    /* LDA ZP X */
+    
+    func testLDAZPXLoadsASetsNFlag() {
+        self.cpu.registers.a = 0x00
+        self.cpu.registers.x = 0x03
+        self.cpu.setMemFromHexString("B5 10", address: 0x0000)
+        self.cpu.setMemFromHexString("80", address: 0x0010 + 0x03)
+        _ = cpu.runCycles(1)
+        
+        expect(self.cpu.getProgramCounter()).to(equal(0x0002))
+        expect(self.cpu.registers.a).to(equal(0x80))
+        expect(self.cpu.registers.getSignFlag()).to(beTrue())
+        expect(self.cpu.registers.getZeroFlag()).to(beFalse())
+    }
+    
+    func testLDAZPXLoadsASetsZFlag() {
+        self.cpu.registers.a = 0x00
+        self.cpu.registers.x = 0x03
+        self.cpu.setMemFromHexString("B5 10", address: 0x0000)
+        self.cpu.setMemFromHexString("00", address: 0x0010 + 0x03)
+        _ = cpu.runCycles(1)
+        
+        expect(self.cpu.getProgramCounter()).to(equal(0x0002))
+        expect(self.cpu.registers.a).to(equal(0x00))
+        expect(self.cpu.registers.getSignFlag()).to(beFalse())
+        expect(self.cpu.registers.getZeroFlag()).to(beTrue())
+    }
+
+
+    
     /* RTS */
     
     func testRTS() {

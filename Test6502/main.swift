@@ -28,6 +28,6 @@ cpu.loadHexFileToMemory("6502_functional_test.hex")
 cpu.setProgramCounter(0x0400)
 
 while true {
-    cpu.runCycles(10000)
+    _ = cpu.runCycles(10000)
     //sleep(200)
 }
