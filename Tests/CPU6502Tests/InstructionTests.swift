@@ -446,6 +446,30 @@ class InstructionTests: XCTestCase {
     
     /* AND Absolute */
     
+    func testANDAbsoluteAllZerosSettingZeroFlag() {
+        self.cpu.registers.a = 0xFF
+        self.cpu.setMemFromHexString("2D CD AB", address: 0x0000)
+        self.cpu.setMemFromHexString("00", address: 0xABCD)
+        _ = self.cpu.runCycles(1)
+        
+        expect(self.cpu.getProgramCounter()).to(equal(0x0003))
+        expect(self.cpu.registers.a).to(equal(0x0))
+        expect(self.cpu.registers.getZeroFlag()).to(beTrue())
+        expect(self.cpu.registers.getSignFlag()).to(beFalse())
+    }
+    
+    func testANDAbsoluteZerosAndOnesSettingNegativeFlag() {
+        self.cpu.registers.a = 0xFF
+        self.cpu.setMemFromHexString("2D CD AB", address: 0x0000)
+        self.cpu.setMemFromHexString("AA", address: 0xABCD)
+        _ = self.cpu.runCycles(1)
+        
+        expect(self.cpu.getProgramCounter()).to(equal(0x0003))
+        expect(self.cpu.registers.a).to(equal(0xAA))
+        expect(self.cpu.registers.getZeroFlag()).to(beFalse())
+        expect(self.cpu.registers.getSignFlag()).to(beTrue())
+    }
+    
     /* BEQ */
     
     func testBEQZeroSetBranchesRelativeForward() {

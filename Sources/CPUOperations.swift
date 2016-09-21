@@ -181,7 +181,7 @@ extension CPU6502 {
         
         registers.a &= value
         registers.setSignFlag(calculateSign(UInt16(registers.a)))
-        registers.setZeroFlag(calculateSign(UInt16(registers.a)))
+        registers.setZeroFlag(calculateZero(UInt16(registers.a)))
         
         return defaultResponse()
     }
@@ -492,7 +492,7 @@ extension CPU6502 {
         
         registers.a |= value
         registers.setSignFlag(calculateSign(UInt16(registers.a)))
-        registers.setZeroFlag(calculateSign(UInt16(registers.a)))
+        registers.setZeroFlag(calculateZero(UInt16(registers.a)))
         return defaultResponse()
     }
     
@@ -521,7 +521,12 @@ extension CPU6502 {
     }
     
     func opROL(_ mode: AddressingMode) -> InstructionResponse {
-        let result = UInt16(valueForAddressingMode(mode)) << UInt16(1)
+        var result = UInt16(valueForAddressingMode(mode)) << UInt16(1)
+        
+        // Set first bit to carry flag
+        if registers.getCarryFlag() {
+            result |= 0x1
+        }
         
         registers.setCarryFlag(calculateCarry(result))
         registers.setZeroFlag(calculateZero(result))
@@ -534,7 +539,12 @@ extension CPU6502 {
     func opROR(_ mode: AddressingMode) -> InstructionResponse {
         let value = valueForAddressingMode(mode)
         let bit    = value & 0x01
-        let result = UInt16(value) >> UInt16(1)
+        var result = UInt16(value) >> UInt16(1)
+        
+        // Set last bit to carry flag
+        if registers.getCarryFlag() {
+            result |= 0x80
+        }
         
         registers.setCarryFlag(bit > 0)
         registers.setZeroFlag((calculateZero(result)))
