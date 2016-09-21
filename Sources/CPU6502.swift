@@ -191,7 +191,11 @@ class CPU6502 {
                 }
 
                 let lineHex = (line as NSString).substring(from: 1).uint8ArrayFromHexadecimalString()
-
+                
+                if lineHex.count < 4 {
+                    continue
+                }
+                
                 let byteCount  = lineHex[0]
                 let address    = (UInt16(lineHex[1]) << 8) | UInt16(lineHex[2])
                 let recordType = lineHex[3]
@@ -327,8 +331,8 @@ class CPU6502 {
             setProgramCounter(getProgramCounter() + UInt16(instruction.numBytes))
         }*/
 
-        print("Executing instruction at \(addr): \(instruction.instructionName) \(addressingMode.assemblyString())")
-        printCPUState()
+//        print("Executing instruction at \(addr): \(instruction.instructionName) \(addressingMode.assemblyString())")
+//        printCPUState()
         return instruction.numCycles
     }
 
