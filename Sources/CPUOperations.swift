@@ -58,11 +58,11 @@ extension CPU6502 {
     }
     
     func getIndirectX(_ address: UInt16) -> UInt8 {
-        return getIndirect(address + UInt16(registers.x))
+        return getIndirect((address + UInt16(registers.x)) & 0xFF)
     }
     
     func getIndirectXAddress(_ address: UInt16) -> UInt16 {
-        return getIndirectAddress(address + UInt16(registers.x))
+        return getIndirectAddress((address + UInt16(registers.x)) & 0xFF)
     }
     
     func getIndirectY(_ address: UInt16) -> UInt8 {
@@ -230,9 +230,9 @@ extension CPU6502 {
         let value  = valueForAddressingMode(mode)
         let result = UInt16(registers.a) & UInt16(value)
         
-        registers.setOverflowFlag(result & 64 > 0)
+        registers.setOverflowFlag(value & (1 << 6) > 0)
         registers.setZeroFlag(calculateZero(result))
-        registers.setSignFlag(calculateSign(result))
+        registers.setSignFlag(value & (1 << 7) > 0)
         return defaultResponse()
     }
     
