@@ -567,20 +567,16 @@ extension CPU6502 {
     }
     
     func opSBC(_ mode: AddressingMode) -> InstructionResponse {
-        let value          = valueForAddressingMode(mode)
+        let value = valueForAddressingMode(mode)
         
-        // Add the value to accumulator, add 1 if carry flag is active
-        let result: UInt16 =
-            UInt16.subtractWithOverflow(
-                UInt16.subtractWithOverflow(UInt16(registers.a), UInt16(value)).0,
-                UInt16(registers.boolToInt(registers.getCarryFlag()))).0
-        
-        registers.setCarryFlag(calculateCarry(result))
-        registers.setZeroFlag(calculateZero(result & 0xFF))
+        var result = UInt16.subtractWithOverflow(UInt16(registers.a), UInt16(value)).0
+        result = UInt16.subtractWithOverflow(result, registers.getCarryFlag() ? 0: 1).0
         registers.setOverflowFlag(calculateOverflow(result, acc: registers.a, value: value))
+        registers.setCarryFlag(calculateCarry(result))
         registers.setSignFlag(calculateSign(result))
+        registers.setZeroFlag(calculateZero(result))
         
-        registers.a = UInt8(result & UInt16(0xFF))
+        registers.a = UInt8(result & 0xFF)
         
         return defaultResponse()
     }

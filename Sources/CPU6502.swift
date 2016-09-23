@@ -331,8 +331,8 @@ class CPU6502 {
             setProgramCounter(getProgramCounter() + UInt16(instruction.numBytes))
         }*/
 
-//        print("Executing instruction at \(addr): \(instruction.instructionName) \(addressingMode.assemblyString())")
-//        printCPUState()
+        print("Executing instruction at \(addr): \(instruction.instructionName) \(addressingMode.assemblyString())")
+        printCPUState()
         return instruction.numCycles
     }
 

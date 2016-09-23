@@ -1953,4 +1953,69 @@ class InstructionTests: XCTestCase {
         expect(self.cpu.getProgramCounter()).to(equal(0xC004))
         expect(self.cpu.registers.s).to(equal(0xFF))
     }
+    
+    /* SBC Absolute */
+    
+    
+    func testSBCAbsoluteAllZerosAndNoBorrowIsZero() {
+        self.cpu.registers.setDecimalFlag(false)
+        self.cpu.registers.setCarryFlag(true)
+        self.cpu.registers.a = 0x0
+        
+        self.cpu.setMemFromHexString("ED CD AB", address: 0x0000)
+        self.cpu.setMemFromHexString("00", address: 0xABCD)
+        _ = self.cpu.runCycles(1)
+        
+        expect(self.cpu.registers.a).to(equal(0x00))
+        expect(self.cpu.registers.getSignFlag()).to(beFalse())
+        expect(self.cpu.registers.getCarryFlag()).to(beFalse())
+        expect(self.cpu.registers.getZeroFlag()).to(beTrue())
+    }
+    
+    func testSBCAbsoluteDowntoZeroNoBorrowSetsZClearsN() {
+        self.cpu.registers.setDecimalFlag(false)
+        self.cpu.registers.setCarryFlag(true)
+        self.cpu.registers.a = 0x01
+        
+        self.cpu.setMemFromHexString("ED CD AB", address: 0x0000)
+        self.cpu.setMemFromHexString("01", address: 0xABCD)
+        _ = self.cpu.runCycles(1)
+        
+        expect(self.cpu.registers.a).to(equal(0x00))
+        expect(self.cpu.registers.getSignFlag()).to(beFalse())
+        expect(self.cpu.registers.getCarryFlag()).to(beFalse())
+        expect(self.cpu.registers.getZeroFlag()).to(beTrue())
+    }
+    
+    func testSBCAbsoluteDowntoZeroWithBorrowSetsZClearsN() {
+        self.cpu.registers.setDecimalFlag(false)
+        self.cpu.registers.setCarryFlag(false)
+        self.cpu.registers.a = 0x01
+        
+        self.cpu.setMemFromHexString("ED CD AB", address: 0x0000)
+        self.cpu.setMemFromHexString("00", address: 0xABCD)
+        _ = self.cpu.runCycles(1)
+        
+        expect(self.cpu.registers.a).to(equal(0x00))
+        expect(self.cpu.registers.getSignFlag()).to(beFalse())
+        expect(self.cpu.registers.getCarryFlag()).to(beFalse())
+        expect(self.cpu.registers.getZeroFlag()).to(beTrue())
+    }
+    
+    func testSBCAbsoluteDowntoFourWithBorrowClearsZN() {
+        self.cpu.registers.setDecimalFlag(false)
+        self.cpu.registers.setCarryFlag(false)
+        self.cpu.registers.a = 0x07
+        
+        self.cpu.setMemFromHexString("ED CD AB", address: 0x0000)
+        self.cpu.setMemFromHexString("02", address: 0xABCD)
+        _ = self.cpu.runCycles(1)
+        
+        expect(self.cpu.registers.a).to(equal(0x04))
+        expect(self.cpu.registers.getSignFlag()).to(beFalse())
+        expect(self.cpu.registers.getCarryFlag()).to(beFalse())
+        expect(self.cpu.registers.getZeroFlag()).to(beFalse())
+    }
+    
+    
 }
