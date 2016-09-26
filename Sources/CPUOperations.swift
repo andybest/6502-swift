@@ -569,14 +569,28 @@ extension CPU6502 {
     func opSBC(_ mode: AddressingMode) -> InstructionResponse {
         let value = valueForAddressingMode(mode)
         
-        var result = UInt16.subtractWithOverflow(UInt16(registers.a), UInt16(value)).0
-        result = UInt16.subtractWithOverflow(result, registers.getCarryFlag() ? 0: 1).0
-        registers.setOverflowFlag(calculateOverflow(result, acc: registers.a, value: value))
-        registers.setCarryFlag(calculateCarry(result))
-        registers.setSignFlag(calculateSign(result))
-        registers.setZeroFlag(calculateZero(result))
+//        var result = UInt16.subtractWithOverflow(UInt16(registers.a), UInt16(value)).0
+//        result = UInt16.subtractWithOverflow(result, registers.getCarryFlag() ? 0: 1).0
+//        registers.setOverflowFlag(calculateOverflow(result, acc: registers.a, value: value))
+//        registers.setCarryFlag(calculateCarry(result))
+//        registers.setSignFlag(calculateSign(result))
+//        registers.setZeroFlag(calculateZero(result))
+//        registers.a = UInt8(result & 0xFF)
         
+        let carryVal = UInt16(registers.getCarryFlag() ? 0: 1)
+        let result = UInt16.subtractWithOverflow(UInt16.subtractWithOverflow(UInt16(registers.a), UInt16(value)).0,
+                                                 carryVal).0
+        
+        
+        //registers.setOverflowFlag(calculateOverflow(result, acc: registers.a, value: value))
+        
+        registers.setOverflowFlag((UInt16(registers.a ^ value) & (UInt16(registers.a) ^ result) & 0x80) > 0)
+        
+        registers.setCarryFlag((result >> 8) == 0)
         registers.a = UInt8(result & 0xFF)
+        registers.setSignFlag(calculateSign(UInt16(registers.a)))
+        registers.setZeroFlag(calculateZero(UInt16(registers.a)))
+        
         
         return defaultResponse()
     }

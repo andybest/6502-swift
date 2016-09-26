@@ -30,7 +30,7 @@ enum AddressingMode {
     case indirectX(UInt16)
     case indirectY(UInt16)
 
-    func assemblyString() -> String {
+    func assemblyString(cpu: CPU6502) -> String {
         switch self {
         case .accumulator:
             return "A"
@@ -41,34 +41,44 @@ enum AddressingMode {
             return "#$\(str)"
         case .zeroPage(let val):
             let str = String(format: "%02X", val)
-            return "$\(str)"
+            let val = String(format: "%02X", cpu.valueForAddressingMode(self))
+            return "$\(str) - \(val)"
         case .zeroPageX(let val):
             let str = String(format: "%02X", val)
-            return "$\(str),X"
+            let val = String(format: "%02X", cpu.valueForAddressingMode(self))
+            return "$\(str),X - \(val)"
         case .zeroPageY(let val):
             let str = String(format: "%02X", val)
-            return "$\(str),Y"
+            let val = String(format: "%02X", cpu.valueForAddressingMode(self))
+            return "$\(str),Y - \(val)"
         case .relative(let val):
             let str = String(format: "%02X", val)
-            return "|$\(str)"
+            let val = String(format: "%02X", cpu.valueForAddressingMode(self))
+            return "|$\(str) - \(val)"
         case .absolute(let val):
             let str = String(format: "%04X", val)
-            return "$\(str)"
+            let val = String(format: "%02X", cpu.valueForAddressingMode(self))
+            return "$\(str) - \(val)"
         case .absoluteX(let val):
             let str = String(format: "%04X", val)
-            return "$\(str),X"
+            let val = String(format: "%02X", cpu.valueForAddressingMode(self))
+            return "$\(str),X - \(val)"
         case .absoluteY(let val):
             let str = String(format: "%04X", val)
-            return "$\(str),Y"
+            let val = String(format: "%02X", cpu.valueForAddressingMode(self))
+            return "$\(str),Y - \(val)"
         case .indirect(let val):
             let str = String(format: "%04X", val)
-            return "($\(str))"
+            let val = String(format: "%02X", cpu.valueForAddressingMode(self))
+            return "($\(str)) - \(val)"
         case .indirectX(let val):
             let str = String(format: "%04X", val)
-            return "($\(str)),X"
+            let val = String(format: "%02X", cpu.valueForAddressingMode(self))
+            return "($\(str)),X - \(val)"
         case .indirectY(let val):
             let str = String(format: "%04X", val)
-            return "($\(str)),Y"
+            let val = String(format: "%02X", cpu.valueForAddressingMode(self))
+            return "($\(str)),Y - \(val)"
 
         }
     }
@@ -331,8 +341,8 @@ class CPU6502 {
             setProgramCounter(getProgramCounter() + UInt16(instruction.numBytes))
         }*/
 
-        print("Executing instruction at \(addr): \(instruction.instructionName) \(addressingMode.assemblyString())")
-        printCPUState()
+//        print("Executing instruction at \(addr): \(instruction.instructionName) \(addressingMode.assemblyString(cpu: self))")
+//        printCPUState()
         return instruction.numCycles
     }
 

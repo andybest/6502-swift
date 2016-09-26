@@ -27,7 +27,18 @@ cpu.writeMemoryCallback = writeMem
 cpu.loadHexFileToMemory("6502_functional_test.hex")
 cpu.setProgramCounter(0x0400)
 
+var lastPC = cpu.getProgramCounter()
+
 while true {
-    _ = cpu.runCycles(10000)
+    
+    _ = cpu.runCycles(1)
+    
+    if(cpu.getProgramCounter() == lastPC) {
+        print("Test failed at \(cpu.getProgramCounter())")
+        cpu.printCPUState()
+        break
+    }
+    
+    lastPC = cpu.getProgramCounter()
     //sleep(200)
 }
